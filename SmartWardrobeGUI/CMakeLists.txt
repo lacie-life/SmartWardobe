@@ -22,11 +22,19 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 #file(GLOB UI ${CMAKE_CURRENT_SOURCE_DIR}/ui/*.ui)
 
 set(PROJECT_SOURCES include/CvPluginInterface.h
-                    include/MainWindow.h
-                    src/MainWindow.cpp
-                    src/main.cpp)
+    include/MainWindow.h
+    include/QCameraWidget.h
+    include/QWardrobeWidget.h
+    include/AppModel.h
+    src/MainWindow.cpp
+    src/QWardrobeWidget.cpp
+    src/QCameraWidget.cpp
+    src/AppModel.cpp
+    src/main.cpp)
 
-set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui)
+set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
+    ${CMAKE_CURRENT_LIST_DIR}/ui/qcamerawidget.ui
+    ${CMAKE_CURRENT_LIST_DIR}/ui/qwardrobewidget.ui)
 
 qt5_wrap_ui(UI_HEADERS ${UI})
 

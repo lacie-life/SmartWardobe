@@ -2,14 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QDir>
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QPluginLoader>
-#include <QFileInfoList>
+#include <QStackedWidget>
 
-#include <opencv2/opencv.hpp>
 #include "CvPluginInterface.h"
+#include "QCameraWidget.h"
+#include "QWardrobeWidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,5 +24,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QCameraWidget* m_cameraWidget;
+    QWardrobeWidget* m_wardrobeWidget;
+    QStackedWidget* m_stackWidget;
+
 };
 #endif // MAINWINDOW_H
