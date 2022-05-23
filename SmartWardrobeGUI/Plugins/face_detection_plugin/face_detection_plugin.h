@@ -16,7 +16,7 @@ public:
     ~Face_detection_plugin();
 
     QString description();
-    void processImage(const cv::Mat &inputImage, cv::Mat &outputImage);
+    void processImage(const cv::Mat &inputImage, cv::Mat &outputImage, std::vector<cv::Rect> &object);
 };
 
 #endif // FACE_DETECTION_PLUGIN_H

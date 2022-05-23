@@ -25,3 +25,7 @@ add_library(face_detection_plugin SHARED
 target_link_libraries(face_detection_plugin PRIVATE Qt${QT_VERSION_MAJOR}::Core ${OpenCV_LIBS})
 
 target_compile_definitions(face_detection_plugin PRIVATE FACE_DETECTION_PLUGIN_LIBRARY)
+
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
