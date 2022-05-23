@@ -71,5 +71,3 @@ Thumbs.db
 *.dll
 *.exe
 
-build-face_detection_plugin-Desktop_Qt_5_15_2_GCC_64bit-Debug/
-*.txt.user
