@@ -7,6 +7,8 @@ namespace Ui {
 class QWardrobeWidget;
 }
 
+/* Display the state of wardrobe */
+
 class QWardrobeWidget : public QWidget
 {
     Q_OBJECT

@@ -26,10 +26,12 @@ set(PROJECT_SOURCES include/CvPluginInterface.h
     include/QCameraWidget.h
     include/QWardrobeWidget.h
     include/AppModel.h
+    include/QMqttHandler.h
     src/MainWindow.cpp
     src/QWardrobeWidget.cpp
     src/QCameraWidget.cpp
     src/AppModel.cpp
+    src/QMqttHandler.cpp
     src/main.cpp)
 
 set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
