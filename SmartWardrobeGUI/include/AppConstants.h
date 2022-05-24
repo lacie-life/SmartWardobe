@@ -23,4 +23,7 @@
 
 #define DB_PATH "./data/wardrobedb.db"
 
+#define AVAILABLE_SLOT "./data/res/available.jpg"
+#define UNAVAILABLE_SLOT "./data/res/unavailable.jpg"
+
 #endif // APPCONSTANTS_H

@@ -17,6 +17,8 @@ public:
     explicit QWardrobeWidget(QWidget *parent = nullptr);
     ~QWardrobeWidget();
 
+    void updateUI();
+
 private:
     Ui::QWardrobeWidget *ui;
 };
