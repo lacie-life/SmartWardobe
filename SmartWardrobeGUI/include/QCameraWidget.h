@@ -2,6 +2,7 @@
 #define QCAMERAWIDGET_H
 
 #include <QWidget>
+#include "AppModel.h"
 
 namespace Ui {
 class QCameraWidget;

@@ -7,6 +7,7 @@
 #include "CvPluginInterface.h"
 #include "QCameraWidget.h"
 #include "QWardrobeWidget.h"
+#include "AppModel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    AppModel* m_model;
     QCameraWidget* m_cameraWidget;
     QWardrobeWidget* m_wardrobeWidget;
     QStackedWidget* m_stackWidget;
