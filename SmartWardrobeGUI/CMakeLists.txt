@@ -11,8 +11,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets Sql REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql REQUIRED)
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
@@ -21,17 +21,21 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 #file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 #file(GLOB UI ${CMAKE_CURRENT_SOURCE_DIR}/ui/*.ui)
 
-set(PROJECT_SOURCES include/CvPluginInterface.h
+set(PROJECT_SOURCES
+    include/CvPluginInterface.h
     include/MainWindow.h
     include/QCameraWidget.h
     include/QWardrobeWidget.h
     include/AppModel.h
     include/QMqttHandler.h
+    include/WardrobeDB.h
+    include/AppConstants.h
     src/MainWindow.cpp
     src/QWardrobeWidget.cpp
     src/QCameraWidget.cpp
     src/AppModel.cpp
     src/QMqttHandler.cpp
+    src/WardrobeDB.cpp
     src/main.cpp)
 
 set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
@@ -68,7 +72,11 @@ else()
     endif()
 endif()
 
-target_link_libraries(SmartWardrobeGUI PRIVATE Qt${QT_VERSION_MAJOR}::Widgets ${OpenCV_LIBS})
+target_link_libraries(SmartWardrobeGUI PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Sql
+    ${OpenCV_LIBS})
 
 set_target_properties(SmartWardrobeGUI PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
