@@ -5,7 +5,7 @@
 #include <memory.h>
 
 #include "WardrobeDB.h"
-#include "QMqttHandler.h"
+#include "QDataHandler.h"
 
 class AppModel : public QObject
 {
@@ -16,9 +16,11 @@ public:
     bool addSlot(QString& position);
     bool removeSlot(QString& position);
 
-    WardrobeDB& m_database;
+    WardrobeDB* m_database;
+    QDataHandler* m_handler;
 
 signals:
+    void slotUpdate();
 
 };
 

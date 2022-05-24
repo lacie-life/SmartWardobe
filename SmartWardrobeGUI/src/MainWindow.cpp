@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
-
-#define PLUGINS_SUBFOLDER "/Plugins/"
+#include "QDataHandler.h"
+#include "AppConstants.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,8 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    m_cameraWidget = new QCameraWidget();
-    m_wardrobeWidget = new QWardrobeWidget();
+    m_model = new AppModel();
+
+    m_cameraWidget = new QCameraWidget(nullptr, m_model);
+    m_wardrobeWidget = new QWardrobeWidget(nullptr, m_model);
     m_stackWidget = new QStackedWidget();
 
     m_stackWidget->addWidget(m_cameraWidget);
@@ -21,6 +23,13 @@ MainWindow::MainWindow(QWidget *parent)
     m_stackWidget->setCurrentWidget(m_wardrobeWidget);
 
     setCentralWidget(m_stackWidget);
+
+    connect(m_model, &AppModel::slotUpdate, m_wardrobeWidget, &QWardrobeWidget::updateUI);
+
+//    connect(m_model->m_handler, &QDataHandler::havePerson, this, [this] {
+//        CONSOLE << "Person checking";
+//        m_stackWidget->setCurrentWidget(m_cameraWidget);
+//    });
 }
 
 MainWindow::~MainWindow()

@@ -13,11 +13,12 @@ class QCameraWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit QCameraWidget(QWidget *parent = nullptr);
+    explicit QCameraWidget(QWidget *parent = nullptr, AppModel *model = nullptr);
     ~QCameraWidget();
 
 private:
     Ui::QCameraWidget *ui;
+    AppModel* m_model;
 };
 
 #endif // QCAMERAWIDGET_H

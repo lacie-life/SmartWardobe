@@ -13,20 +13,21 @@ void WardrobeDB::init()
     m_db = QSqlDatabase::addDatabase("QSQLITE", "Data");
     m_db.setDatabaseName(DB_PATH);
 
+    CONSOLE << DB_PATH;
+
     if(QFile::exists(DB_PATH))
-        qDebug() << "DB file exist";
+        CONSOLE << "DB file exist";
     else
-        qDebug() << "DB file doesn't exists";
+        CONSOLE << "DB file doesn't exists";
 
     if (!m_db.open())
-        qDebug() << m_db.lastError().text();
+        CONSOLE << m_db.lastError().text();
     else
-        qDebug() << "Database loaded successfull!";
+        CONSOLE << "Database loaded successfull!";
 }
 
 WardrobeDB *WardrobeDB::getInstance()
 {
-    qDebug() << "in MyDB::getInstance()";
 
     if(instance == nullptr)
         instance = new WardrobeDB();

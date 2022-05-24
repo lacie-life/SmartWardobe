@@ -21,9 +21,11 @@
 
 #endif
 
-#define DB_PATH "./data/wardrobedb.db"
+#define DB_PATH "./data/wardrobe.db"
 
 #define AVAILABLE_SLOT "./data/res/available.jpg"
 #define UNAVAILABLE_SLOT "./data/res/unavailable.jpg"
+
+#define PLUGINS_SUBFOLDER "/Plugins/"
 
 #endif // APPCONSTANTS_H

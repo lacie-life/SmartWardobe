@@ -11,37 +11,19 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets Sql REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets Sql Mqtt REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql Mqtt REQUIRED)
 
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
-#file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
-#file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-#file(GLOB UI ${CMAKE_CURRENT_SOURCE_DIR}/ui/*.ui)
+file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
+file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 
-set(PROJECT_SOURCES
-    include/CvPluginInterface.h
-    include/MainWindow.h
-    include/QCameraWidget.h
-    include/QWardrobeWidget.h
-    include/AppModel.h
-    include/QMqttHandler.h
-    include/WardrobeDB.h
-    include/AppConstants.h
-    src/MainWindow.cpp
-    src/QWardrobeWidget.cpp
-    src/QCameraWidget.cpp
-    src/AppModel.cpp
-    src/QMqttHandler.cpp
-    src/WardrobeDB.cpp
-    src/main.cpp)
+source_group("Header Files" FILES ${HEADERS})
+source_group("Source Files" FILES ${SOURCES})
 
-set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
-    ${CMAKE_CURRENT_LIST_DIR}/ui/qcamerawidget.ui
-    ${CMAKE_CURRENT_LIST_DIR}/ui/qwardrobewidget.ui)
-
+set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/*.ui)
 qt5_wrap_ui(UI_HEADERS ${UI})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -49,7 +31,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(SmartWardrobeGUI
         MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
+        ${HEADERS}
+        ${SOURCES}
         ${UI_HEADERS}
     )
 # Define target properties for Android with Qt 6 as:
@@ -59,14 +42,16 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 else()
     if(ANDROID)
         add_library(SmartWardrobeGUI SHARED
-            ${PROJECT_SOURCES}
+            ${HEADERS}
+            ${SOURCES}
             ${UI_HEADERS}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
         add_executable(SmartWardrobeGUI
-            ${PROJECT_SOURCES}
+            ${HEADERS}
+            ${SOURCES}
             ${UI_HEADERS}
         )
     endif()
@@ -76,6 +61,7 @@ target_link_libraries(SmartWardrobeGUI PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Sql
+    Qt${QT_VERSION_MAJOR}::Mqtt
     ${OpenCV_LIBS})
 
 set_target_properties(SmartWardrobeGUI PROPERTIES
@@ -93,6 +79,6 @@ endif()
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
- file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Plugins
+ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plugins
       DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
