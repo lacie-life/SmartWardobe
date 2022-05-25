@@ -10,6 +10,7 @@ class QCameraCapture : public QObject
     Q_OBJECT
 public:
     explicit QCameraCapture(QObject *parent = nullptr);
+    ~QCameraCapture();
 
     bool initCamera();
     void stream();

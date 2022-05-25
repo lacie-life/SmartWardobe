@@ -9,6 +9,11 @@ QCameraCapture::QCameraCapture(QObject *parent)
 {
 }
 
+QCameraCapture::~QCameraCapture()
+{
+    m_camera.close();
+}
+
 bool QCameraCapture::initCamera()
 {
     sl::InitParameters init_params;
