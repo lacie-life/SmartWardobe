@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
 
 #include <iostream>
 #include <dirent.h>
@@ -30,7 +31,7 @@ public:
     void addFace(QString faceName);
     void faceDbRead(std::vector<cv::Mat>& image, std::vector<QString>& labels);
     void faceTrainer();
-    QString recognition(cv::Mat frame);
+    QStringList recognition(cv::Mat& frame);
 
 signals:
 

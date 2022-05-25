@@ -82,6 +82,7 @@ cv::Mat QFaceRecognition::dectectFace(cv::Mat frame)
 void QFaceRecognition::addFace(QString faceName)
 {
     // hmm hmm
+    // Pending
 }
 
 void QFaceRecognition::faceDbRead(std::vector<cv::Mat> &images, std::vector<QString> &labels)
@@ -123,7 +124,7 @@ void QFaceRecognition::faceTrainer()
     cv::waitKey(10000);
 }
 
-QString QFaceRecognition::recognition(cv::Mat frame)
+QStringList QFaceRecognition::recognition(cv::Mat& frame)
 {
     m_model->read(EIGEN_FACE);
 
@@ -131,6 +132,7 @@ QString QFaceRecognition::recognition(cv::Mat frame)
     int img_height = frame.rows;
 
     QString p_name = "";
+    QStringList names;
 
     std::vector<cv::Rect> faces;
     cv::Mat graySacleFrame;
@@ -177,6 +179,7 @@ QString QFaceRecognition::recognition(cv::Mat frame)
             CONSOLE << " confidence " << confidence << " Label: " << label;
 
             p_name = QString::fromStdString(std::to_string(label));
+            names.append(p_name);
 
             //drawing green rectagle in recognize face
             rectangle(original, face_i, CV_RGB(0, 255, 0), 1);
@@ -191,7 +194,7 @@ QString QFaceRecognition::recognition(cv::Mat frame)
 
         cv::putText(original, "No. of Persons detected: " +std::to_string(faces.size()), cv::Point(30, 90), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
     }
-    return p_name;
+    return names;
 }
 
 

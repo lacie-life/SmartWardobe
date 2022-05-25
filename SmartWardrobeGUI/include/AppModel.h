@@ -6,6 +6,7 @@
 
 #include "WardrobeDB.h"
 #include "QDataHandler.h"
+#include "QFaceRecognition.h"
 
 class AppModel : public QObject
 {
@@ -18,6 +19,7 @@ public:
 
     WardrobeDB* m_database;
     QDataHandler* m_handler;
+    QFaceRecognition* m_faceRecognition;
 
 signals:
     void slotUpdate();
