@@ -48,31 +48,44 @@ void QCameraCapture::stream()
     // To share data between sl::Mat and cv::Mat, use slMat2cvMat()
     // Only the headers and pointer to the sl::Mat are copied, not the data itself
     sl::Mat image_zed(new_width, new_height, sl::MAT_TYPE::U8_C4);
-    image_ocv = slMat2cvMat(image_zed);
+
+//    image_ocv = slMat2cvMat(image_zed);
 
     sl::Mat depth_image_zed(new_width, new_height, sl::MAT_TYPE::U8_C4);
     depth_image_ocv = slMat2cvMat(depth_image_zed);
 
-    // Loop until 'q' is pressed
-    char key = ' ';
-    while(1)
+    stopped = false;
+
+    while(!stopped)
     {
         if (m_camera.grab(runtime_parameters) == sl::ERROR_CODE::SUCCESS) {
 
             // Retrieve the left image, depth image in half-resolution
             m_camera.retrieveImage(image_zed, sl::VIEW::LEFT, sl::MEM::CPU, new_image_size);
+            cv::Mat img_rgba = slMat2cvMat(image_zed);
+            cv::cvtColor(img_rgba, image_ocv, cv::COLOR_BGRA2BGR);
+
             // retrieve CPU -> the ocv reference is therefore updated
             m_camera.retrieveImage(depth_image_zed, sl::VIEW::DEPTH, sl::MEM::CPU, new_image_size);
 
             // Display image and depth using cv:Mat which share sl:Mat data
             cv::imshow("Image", image_ocv);
-            cv::imshow("Depth", depth_image_ocv);
+//            cv::imshow("Depth", depth_image_ocv);
 
-            key = (char) cv::waitKey(30);
-            if (key == 27) break;
-
+            QPixmap img = QPixmap::fromImage(QImage((uchar*)image_ocv.data,
+                                                    image_ocv.cols,
+                                                    image_ocv.rows,
+                                                    static_cast<int>(image_ocv.step),
+                                                    QImage::Format_RGB888).rgbSwapped());
+            emit frameReady(img);
         }
     }
+}
+
+void QCameraCapture::stop()
+{
+    stopped = true;
+    m_camera.close();
 }
 
 cv::Mat QCameraCapture::slMat2cvMat(sl::Mat &input)
