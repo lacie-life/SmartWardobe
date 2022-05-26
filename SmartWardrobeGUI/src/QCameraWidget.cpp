@@ -14,7 +14,8 @@ QCameraWidget::QCameraWidget(QWidget *parent, AppModel *model) :
 
     connect(m_camera->thread(), &QThread::started, m_camera, &QCameraCapture::stream);
     connect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
-    connect(m_camera, &QCameraCapture::frameReady, ui->imageViewer, &QLabel::setPixmap);
+    connect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);
+    connect(m_model, &AppModel::imageReady, ui->imageViewer, &QLabel::setPixmap);
     connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
 
     openCamera();

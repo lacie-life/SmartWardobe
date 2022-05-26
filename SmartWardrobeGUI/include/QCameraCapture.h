@@ -26,7 +26,7 @@ public:
     bool initCamera();
 
 signals:
-    void frameReady(QPixmap pixmap);
+    void frameReady(cv::Mat frame);
 
 public slots:
     void stream();

@@ -4,13 +4,17 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlQueryModel>
+#include <QStringList>
+#include <QImage>
+#include <QPixmap>
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
       m_database(WardrobeDB::getInstance())
 {
     // Mqtt config
-
+    // Image processing algorithm setting
+    m_faceRecognition = new QFaceRecognition();
 }
 
 bool AppModel::addSlot(QString& position)
@@ -67,4 +71,17 @@ bool AppModel::removeSlot(QString& position)
     emit slotUpdate();
 
     return true;
+}
+
+void AppModel::processImage(cv::Mat frame)
+{
+    QStringList names = m_faceRecognition->recognition(frame);
+
+    QPixmap img = QPixmap::fromImage(QImage((uchar*)frame.data,
+                                            frame.cols,
+                                            frame.rows,
+                                            static_cast<int>(frame.step),
+                                            QImage::Format_RGB888).rgbSwapped());
+
+    emit imageReady(img);
 }

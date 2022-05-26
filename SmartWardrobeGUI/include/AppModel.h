@@ -23,7 +23,10 @@ public:
 
 signals:
     void slotUpdate();
+    void imageReady(QPixmap pixmap);
 
+public slots:
+    void processImage(cv::Mat frame);
 };
 
 #endif // APPMODEL_H
