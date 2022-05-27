@@ -73,6 +73,12 @@ bool AppModel::removeSlot(QString& position)
     return true;
 }
 
+void AppModel::addPerson(QString &name, QString &rfid)
+{
+    // Add person's name and rfid to db => create id for face_db
+    // add person image to face_db => update model
+}
+
 void AppModel::processImage(cv::Mat frame)
 {
     QStringList names = m_faceRecognition->recognition(frame);

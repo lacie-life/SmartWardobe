@@ -29,6 +29,7 @@
 #define FACE_CASCADE "./data/haarcascade_frontalface_alt.xml"
 #define FACE_IMAGE "/data/face_db/"
 #define EIGEN_FACE "./data/model/eigenface.yml"
+#define IMAGE_TEST "./data/face_db/2/00004.png"
 
 #define PLUGINS_SUBFOLDER "/Plugins/"
 

@@ -20,16 +20,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_stackWidget->addWidget(m_cameraWidget);
     m_stackWidget->addWidget(m_wardrobeWidget);
 
-    m_stackWidget->setCurrentWidget(m_cameraWidget);
+    m_stackWidget->setCurrentWidget(m_wardrobeWidget);
 
     setCentralWidget(m_stackWidget);
 
     connect(m_model, &AppModel::slotUpdate, m_wardrobeWidget, &QWardrobeWidget::updateUI);
 
-//    connect(m_model->m_handler, &QDataHandler::havePerson, this, [this] {
-//        CONSOLE << "Person checking";
-//        m_stackWidget->setCurrentWidget(m_cameraWidget);
-//    });
+    connect(m_model, &AppModel::havePerson, this, [this] {
+        CONSOLE << "Start Person checking";
+        m_stackWidget->setCurrentWidget(m_cameraWidget);
+        m_cameraWidget->startWidget();
+    });
 }
 
 MainWindow::~MainWindow()

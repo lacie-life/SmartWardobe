@@ -18,6 +18,9 @@ public:
     explicit QCameraWidget(QWidget *parent = nullptr, AppModel *model = nullptr);
     ~QCameraWidget();
 
+    void startWidget();
+    void stopWidget();
+
 public slots:
     void openCamera();
     void closeCamera();

@@ -12,7 +12,7 @@ public:
     ~QDataHandler();
 
 signals:
-    void havePerson();
+
 };
 
 #endif // QDATAHANDLER_H

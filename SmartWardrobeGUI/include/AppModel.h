@@ -17,6 +17,7 @@ public:
 
     bool addSlot(QString& position);
     bool removeSlot(QString& position);
+    void addPerson(QString& name, QString& rfid);
 
     WardrobeDB* m_database;
     QDataHandler* m_handler;
@@ -25,6 +26,9 @@ public:
 signals:
     void slotUpdate();
     void imageReady(QPixmap pixmap);
+    void sendIndex(QString index);
+    void havePerson();  // start camera widget
+    void noPerson();    // close camera widget and switch to wardrobe widget
 
 public slots:
     void processImage(cv::Mat frame);

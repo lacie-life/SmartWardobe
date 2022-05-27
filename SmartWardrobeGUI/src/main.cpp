@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "AppConstants.h"
 #include "QCameraCapture.h"
 #include "QFaceRecognition.h"
 
@@ -10,17 +11,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-//    MainWindow w;
-//    w.show();
-//    return a.exec();
+    MainWindow w;
+    w.show();
+    return a.exec();
 
-    QFaceRecognition faceRecognition;
-//    faceRecognition.faceTrainer();
+//    QFaceRecognition faceRecognition;
 
-    cv::Mat img = cv::imread("/home/jun/Github/SmartWardrobe/SmartWardrobeGUI/data/face_db/2/00004.png", cv::IMREAD_UNCHANGED);
-    QStringList names = faceRecognition.recognition(img);
+//    cv::Mat img = cv::imread(IMAGE_TEST, cv::IMREAD_UNCHANGED);
+//    QStringList names = faceRecognition.recognition(img);
 
-    qDebug() << names;
+//    qDebug() << names;
 
     return 0;
 }
