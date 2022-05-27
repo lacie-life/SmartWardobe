@@ -12,7 +12,18 @@
 class AppModel : public QObject
 {
     Q_OBJECT
+
+    Q_ENUMS(APP_STATE)
+
 public:
+
+    enum APP_STATE {
+        NONE_STATE,
+        CHECKING_STATE,
+        NO_CHEKCING_STATE,
+        END_STATE,
+    };
+
     explicit AppModel(QObject *parent = nullptr);
 
     bool addSlot(QString& position);
