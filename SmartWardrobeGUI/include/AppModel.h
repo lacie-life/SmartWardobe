@@ -43,6 +43,7 @@ signals:
 
 public slots:
     void processImage(cv::Mat frame);
+    void extractData(QString& data);
 };
 
 #endif // APPMODEL_H

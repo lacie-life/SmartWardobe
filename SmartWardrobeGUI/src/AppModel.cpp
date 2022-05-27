@@ -15,6 +15,9 @@ AppModel::AppModel(QObject *parent)
     // Mqtt config
     // Image processing algorithm setting
     m_faceRecognition = new QFaceRecognition();
+    m_handler = new QDataHandler();
+
+    connect(m_handler, &QDataHandler::dataReady, this, &AppModel::extractData);
 }
 
 bool AppModel::addSlot(QString& position)
@@ -90,4 +93,9 @@ void AppModel::processImage(cv::Mat frame)
                                             QImage::Format_RGB888).rgbSwapped());
 
     emit imageReady(img);
+}
+
+void AppModel::extractData(QString &data)
+{
+
 }

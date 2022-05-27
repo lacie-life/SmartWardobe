@@ -15,8 +15,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets Sql Mqtt REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql Mqtt REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Widgets Sql Mqtt SerialPort REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Sql Mqtt SerialPort REQUIRED)
 
 find_package(ZED 3 REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -81,6 +81,7 @@ target_link_libraries(SmartWardrobeGUI PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Sql
     Qt${QT_VERSION_MAJOR}::Mqtt
+    Qt${QT_VERSION_MAJOR}::SerialPort
     ${OpenCV_LIBS}
     ${ZED_LIBS})
 
