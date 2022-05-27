@@ -29,7 +29,7 @@ public:
 
     cv::Mat dectectFace(cv::Mat frame);
     void addFace(QString faceName);
-    void faceDbRead(std::vector<cv::Mat>& image, std::vector<QString>& labels);
+    void faceDbRead(std::vector<cv::Mat>& image, std::vector<int>& labels);
     void faceTrainer();
     QStringList recognition(cv::Mat& frame);
 

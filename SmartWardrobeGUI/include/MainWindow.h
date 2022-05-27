@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 
-#include "CvPluginInterface.h"
 #include "QCameraWidget.h"
 #include "QWardrobeWidget.h"
 #include "AppModel.h"

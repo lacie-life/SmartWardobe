@@ -1,5 +1,7 @@
 #include "QFaceRecognition.h"
 #include <QDebug>
+#include <QDir>
+#include <QDirIterator>
 
 QFaceRecognition::QFaceRecognition(QObject *parent)
     : QObject{parent}
@@ -85,31 +87,42 @@ void QFaceRecognition::addFace(QString faceName)
     // Pending
 }
 
-void QFaceRecognition::faceDbRead(std::vector<cv::Mat> &images, std::vector<QString> &labels)
+void QFaceRecognition::faceDbRead(std::vector<cv::Mat> &images, std::vector<int> &labels)
 {
-    std::vector<cv::String> fn;
-    cv::glob(FACE_IMAGE, fn, false);
 
-    size_t count = fn.size();
+    QString path = BUILD_DIR + FACE_IMAGE;
 
-    for (size_t i = 0; i < count; i++)
+    CONSOLE << path;
+
+    QDirIterator directories(path, QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+
+    while(directories.hasNext() )
     {
-        std::string itsname="";
-        char sep = '/';
-        size_t j = fn[i].rfind(sep, fn[i].length());
-        if (j != std::string::npos)
+        QString dirName = directories.next();
+        QString labelName = directories.fileName();
+        qDebug() << dirName;
+        qDebug() << labelName;
+
+        QDir imageDir(dirName);
+        imageDir.setNameFilters({"*.png", "*.jpg"});
+
+        QStringList imageLists = imageDir.entryList();
+
+        for (int i = 0; i < imageLists.size(); i++)
         {
-            itsname=(fn[i].substr(j + 1, fn[i].length() - j-6));
+            qDebug() << dirName + "/" + imageLists[i];
+            images.push_back(cv::imread((dirName + "/" + imageLists[i]).toStdString(), 0));
+            labels.push_back(labelName.toInt());
         }
-        images.push_back(cv::imread(fn[i], 0));
-        labels.push_back(QString::fromStdString(itsname));
+
+        qDebug() << "=================";
     }
 }
 
 void QFaceRecognition::faceTrainer()
 {
     std::vector<cv::Mat> images;
-    std::vector<QString> labels;
+    std::vector<int> labels;
     faceDbRead(images, labels);
     CONSOLE << "size of the images is " << images.size();
     CONSOLE << "size of the labels is " << labels.size();
@@ -120,6 +133,7 @@ void QFaceRecognition::faceTrainer()
 
     m_model->save(EIGEN_FACE);
 
+    CONSOLE << EIGEN_FACE;
     CONSOLE << "Training finished....";
     cv::waitKey(10000);
 }

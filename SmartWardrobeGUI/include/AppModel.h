@@ -2,6 +2,7 @@
 #define APPMODEL_H
 
 #include <QObject>
+#include <QPixmap>
 #include <memory.h>
 
 #include "WardrobeDB.h"

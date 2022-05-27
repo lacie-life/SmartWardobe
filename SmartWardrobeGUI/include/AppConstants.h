@@ -27,8 +27,8 @@
 #define UNAVAILABLE_SLOT "./data/res/unavailable.jpg"
 
 #define FACE_CASCADE "./data/haarcascade_frontalface_alt.xml"
-#define FACE_IMAGE "./data/face_db/"
-#define EIGEN_FACE "./data/face_db/eigenface.yml"
+#define FACE_IMAGE "/data/face_db/"
+#define EIGEN_FACE "./data/model/eigenface.yml"
 
 #define PLUGINS_SUBFOLDER "/Plugins/"
 
