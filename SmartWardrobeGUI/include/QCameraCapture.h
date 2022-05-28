@@ -14,7 +14,6 @@
 
 Q_DECLARE_METATYPE(cv::Mat)
 
-
 class QCameraCapture : public QObject
 {
     Q_OBJECT

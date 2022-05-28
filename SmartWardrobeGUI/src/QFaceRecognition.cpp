@@ -207,6 +207,7 @@ QStringList QFaceRecognition::recognition(cv::Mat& frame)
         }
 
         cv::putText(original, "No. of Persons detected: " +std::to_string(faces.size()), cv::Point(30, 90), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
+        cv::imshow("Results", original);
     }
     return names;
 }

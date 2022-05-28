@@ -10,6 +10,7 @@ QCameraWidget::QCameraWidget(QWidget *parent, AppModel *model) :
     m_camera = new QCameraCapture();
 
     connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
+    connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
 }
 
 QCameraWidget::~QCameraWidget()
