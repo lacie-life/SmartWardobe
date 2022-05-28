@@ -78,7 +78,7 @@ bool AppModel::removeSlot(QString& position)
     return true;
 }
 
-void AppModel::addPerson(QString &name, QString &rfid)
+void AppModel::addFace(QString &name, QString &rfid)
 {
     // Add person's name and rfid to db => create id for face_db
     // add person image to face_db => update model
@@ -98,6 +98,8 @@ void AppModel::checkSlot(QStringList &names)
         CONSOLE << "Recognition done!";
         CONSOLE << "Id: " << names.at(0);
     }
+
+
 }
 
 void AppModel::setState(APP_STATE state)

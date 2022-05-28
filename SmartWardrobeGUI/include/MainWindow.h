@@ -6,6 +6,7 @@
 
 #include "QCameraWidget.h"
 #include "QWardrobeWidget.h"
+#include "QFaceInforWidget.h"
 #include "AppModel.h"
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,7 @@ private:
     AppModel* m_model;
     QCameraWidget* m_cameraWidget;
     QWardrobeWidget* m_wardrobeWidget;
+    QFaceInforWidget* m_faceInforWidget;
     QStackedWidget* m_stackWidget;
 
 };

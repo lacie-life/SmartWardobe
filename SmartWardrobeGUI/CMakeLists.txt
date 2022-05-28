@@ -35,7 +35,8 @@ source_group("Source Files" FILES ${SOURCES})
 set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
        ${CMAKE_CURRENT_LIST_DIR}/ui/qcamerawidget.ui
        ${CMAKE_CURRENT_LIST_DIR}/ui/qwardrobewidget.ui
-       ${CMAKE_CURRENT_LIST_DIR}/ui/qaddfacedialog.ui)
+       ${CMAKE_CURRENT_LIST_DIR}/ui/qaddfacedialog.ui
+       ${CMAKE_CURRENT_LIST_DIR}/ui/qfaceinforwidget.ui)
 
 qt5_wrap_ui(UI_HEADERS ${UI})
 

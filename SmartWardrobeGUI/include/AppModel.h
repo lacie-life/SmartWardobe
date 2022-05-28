@@ -9,6 +9,7 @@
 #include "WardrobeDB.h"
 #include "QDataHandler.h"
 #include "QFaceRecognition.h"
+#include "QFaceInfor.h"
 
 class AppModel : public QObject
 {
@@ -20,11 +21,11 @@ public:
 
     enum APP_STATE {
         NONE_STATE,
-        CHECKING_STATE,
-        CHECKING_DONE_STATE,
-        NO_CHEKCING_STATE,
-        ADD_FACE_STATE,
-        SLOT_UPDATE,
+        CHECKING_STATE, // when received signal havePerson() => change to QCameraWidget => open camera + checking
+        CHECKING_DONE_STATE, // when checking done => have face infor => change to QFaceInforWidget
+        NO_CHEKCING_STATE, // when face dont have in DB or no person before machine => change to QWardrobeWidget
+        ADD_FACE_STATE, // when update face_db (pending state)
+        SLOT_UPDATE, // when recived signal wardrobeUpdate() => change to QWardrobeWidget and wait to wardobeUpdateDone() => update UI
         END_STATE,
     };
 
@@ -32,18 +33,21 @@ public:
 
     bool addSlot(QString& position);
     bool removeSlot(QString& position);
-    void addPerson(QString& name, QString& rfid);
+    void addFace(QString& name, QString& rfid);
 
     WardrobeDB* m_database;
     QDataHandler* m_handler;
     QFaceRecognition* m_faceRecognition;
 
 signals:
-    void slotUpdate();
+    void slotUpdate(); // update UI signal
+    void wardrobeUpdate();
+    void wardrobeUpdateDone();
     void imageReady(QPixmap pixmap);
     void sendIndex(QString index);
     void havePerson();  // start camera widget
     void noPerson();    // close camera widget and switch to wardrobe widget
+    void recognitionDone(); // change to QFaceInforWidget
     void slotNotifyUI(QString position);
     void idRecognizedNotify(QString id);
     void stateChanged();
@@ -56,6 +60,7 @@ public slots:
 
 public:
     APP_STATE m_state;
+    QFaceInfor m_currentFace;
 };
 
 #endif // APPMODEL_H

@@ -15,10 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_cameraWidget = new QCameraWidget(nullptr, m_model);
     m_wardrobeWidget = new QWardrobeWidget(nullptr, m_model);
+    m_faceInforWidget = new QFaceInforWidget(nullptr, m_model);
     m_stackWidget = new QStackedWidget();
 
     m_stackWidget->addWidget(m_cameraWidget);
     m_stackWidget->addWidget(m_wardrobeWidget);
+    m_stackWidget->addWidget(m_faceInforWidget);
 
     m_stackWidget->setCurrentWidget(m_cameraWidget);
 
@@ -37,6 +39,12 @@ MainWindow::MainWindow(QWidget *parent)
         CONSOLE << "Stop Person checking";
         m_stackWidget->setCurrentWidget(m_wardrobeWidget);
         m_cameraWidget->stopWidget();
+    });
+
+    connect(m_model, &AppModel::recognitionDone, this, [this] {
+        CONSOLE << "Checking done";
+        m_stackWidget->setCurrentWidget(m_faceInforWidget);
+        m_cameraWidget->stopWidget();;
     });
 }
 
