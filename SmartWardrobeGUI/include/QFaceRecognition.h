@@ -31,7 +31,10 @@ public:
     void addFace(QString faceName);
     void faceDbRead(std::vector<cv::Mat>& image, std::vector<int>& labels);
     void faceTrainer();
-    QStringList recognition(cv::Mat& frame);
+    void recognition(cv::Mat& frame);
+
+signals:
+    void recognized(QStringList& names);
 
 public slots:
     void updateModel();

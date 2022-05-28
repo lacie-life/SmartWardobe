@@ -25,6 +25,7 @@ QCameraWidget::~QCameraWidget()
 void QCameraWidget::startWidget()
 {
     m_camera->initCamera();
+    m_model->setState(AppModel::CHECKING_STATE);
 
     m_camera->moveToThread(new QThread(this));
 
@@ -39,6 +40,8 @@ void QCameraWidget::startWidget()
 
 void QCameraWidget::stopWidget()
 {
+    m_model->setState(AppModel::NO_CHEKCING_STATE);
+
     disconnect(m_camera->thread(), &QThread::started, m_camera, &QCameraCapture::stream);
     disconnect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
     disconnect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);

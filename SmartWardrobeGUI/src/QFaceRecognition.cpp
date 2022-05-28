@@ -141,7 +141,7 @@ void QFaceRecognition::faceTrainer()
     updateModel();
 }
 
-QStringList QFaceRecognition::recognition(cv::Mat& frame)
+void QFaceRecognition::recognition(cv::Mat& frame)
 {
     int img_width = IMAGE_WIDTH;
     int img_height = IMAGE_HEIGHT;
@@ -210,7 +210,8 @@ QStringList QFaceRecognition::recognition(cv::Mat& frame)
 //        cv::putText(frame, "No. of Persons detected: " +std::to_string(faces.size()), cv::Point(30, 90), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
 //        cv::imshow("Results", frame);
     }
-    return names;
+
+    emit recognized(names);
 }
 
 void QFaceRecognition::updateModel()

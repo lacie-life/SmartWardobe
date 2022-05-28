@@ -10,7 +10,8 @@
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
-      m_database(WardrobeDB::getInstance())
+      m_database(WardrobeDB::getInstance()),
+      m_state(NO_CHEKCING_STATE)
 {
     // Serial config
     // Image processing algorithm setting
@@ -18,6 +19,7 @@ AppModel::AppModel(QObject *parent)
     m_handler = new QDataHandler();
 
     connect(m_handler, &QDataHandler::dataReady, this, &AppModel::extractData);
+    connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkSlot);
 }
 
 bool AppModel::addSlot(QString& position)
@@ -89,23 +91,25 @@ void AppModel::checkSlot(QStringList &names)
     // Check rfid in wardrobedb
     // send signal to arduino and notify in UI
     // QSqlQuery query(m_database->getDBInstance());
+
+    if(names.size() > 0){
+        emit idRecognizedNotify(names.at(0));
+        m_state = CHECKING_DONE_STATE;
+        CONSOLE << "Recognition done!";
+        CONSOLE << "Id: " << names.at(0);
+    }
+}
+
+void AppModel::setState(APP_STATE state)
+{
+    m_state = state;
 }
 
 void AppModel::processImage(cv::Mat frame)
 {
-    QStringList names = m_faceRecognition->recognition(frame);
-
-//    QPixmap img = QPixmap::fromImage(QImage((uchar*)frame.data,
-//                                            frame.cols,
-//                                            frame.rows,
-//                                            static_cast<int>(frame.step),
-//                                            QImage::Format_RGB888).rgbSwapped());
-
-//    emit imageReady(img);
-    if(names.size() > 0)
+    if(m_state == CHECKING_STATE)
     {
-        emit idRecognizedNotify(names.at(0));
-        checkSlot(names);
+        m_faceRecognition->recognition(frame);
     }
 }
 
