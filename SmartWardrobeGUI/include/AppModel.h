@@ -35,6 +35,9 @@ public:
     bool removeSlot(QString& position);
     void addFace(QString& name, QString& rfid);
 
+    QFaceInfor findFaceInfor(QString faceId);
+    QString findSlot(QString rfid);
+
     WardrobeDB* m_database;
     QDataHandler* m_handler;
     QFaceRecognition* m_faceRecognition;
@@ -49,13 +52,13 @@ signals:
     void noPerson();    // close camera widget and switch to wardrobe widget
     void recognitionDone(); // change to QFaceInforWidget
     void slotNotifyUI(QString position);
-    void idRecognizedNotify(QString id);
+    void idRecognizedNotify(QString faceId);
     void stateChanged();
 
 public slots:
     void processImage(cv::Mat frame);
     void extractData(QString& data);
-    void checkSlot(QStringList& position);
+    void checkFace(QStringList& faceId);
     void setState(APP_STATE state);
 
 public:

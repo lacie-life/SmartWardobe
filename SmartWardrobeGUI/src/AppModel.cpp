@@ -19,7 +19,7 @@ AppModel::AppModel(QObject *parent)
     m_handler = new QDataHandler();
 
     connect(m_handler, &QDataHandler::dataReady, this, &AppModel::extractData);
-    connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkSlot);
+    connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkFace);
 }
 
 bool AppModel::addSlot(QString& position)
@@ -84,9 +84,21 @@ void AppModel::addFace(QString &name, QString &rfid)
     // add person image to face_db => update model
 }
 
-void AppModel::checkSlot(QStringList &names)
+QFaceInfor AppModel::findFaceInfor(QString faceId)
 {
-    // Check position of people recognized
+    QSqlQuery query(m_database->getDBInstance());
+
+}
+
+QString AppModel::findSlot(QString rfid)
+{
+    QSqlQuery query(m_database->getDBInstance());
+
+}
+
+void AppModel::checkFace(QStringList &names)
+{
+    // Check position of list people recognized (in this case have only one person)
     // Read user_db => rfid
     // Check rfid in wardrobedb
     // send signal to arduino and notify in UI
@@ -99,7 +111,14 @@ void AppModel::checkSlot(QStringList &names)
         CONSOLE << "Id: " << names.at(0);
     }
 
+    // Check faceId infor
+    m_currentFace = findFaceInfor(names.at(0));
 
+    QString slot = findSlot(m_currentFace.rfid());
+
+    m_currentFace.setCurrentPosition(slot);
+
+    CONSOLE << "Face slot: " << slot;
 }
 
 void AppModel::setState(APP_STATE state)

@@ -4,13 +4,14 @@
 #include <QObject>
 #include <QString>
 
-class QFaceInfor : public QObject
+class QFaceInfor
 {
     Q_OBJECT
 public:
     explicit QFaceInfor(QObject *parent = nullptr);
 
     QFaceInfor(QString name, QString rfid, QString type);
+    QFaceInfor(int id, QString name, QString rfid, QString type);
 
     int id() const;
     QString name() const;
@@ -23,6 +24,16 @@ public:
     void setRFID(QString rfid);
     void setType(QString type);
     void setCurrentPosition(QString position);
+
+    QFaceInfor operator= (QFaceInfor face)
+    {
+        QFaceInfor _face;
+        _face.setId(face.id());
+        _face.setName(face.name());
+        _face.setRFID(face.rfid());
+        _face.setType(face.type());
+        return _face;
+    }
 
 signals:
 
