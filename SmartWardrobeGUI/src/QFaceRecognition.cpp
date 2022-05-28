@@ -3,7 +3,7 @@
 #include <QDir>
 #include <QDirIterator>
 
-QFaceRecognition::QFaceRecognition(QObject *parent)
+QFaceRecognition::QFaceRecognition(QObject *parent, int mode)
     : QObject{parent}
 {
     if(!face_cascade.load(FACE_CASCADE))
@@ -12,7 +12,9 @@ QFaceRecognition::QFaceRecognition(QObject *parent)
     }
     //create algorithm eigenface recognizer
     m_model = cv::face::EigenFaceRecognizer::create();
-    m_model->read(EIGEN_FACE);
+    if (mode == 1){
+      m_model->read(EIGEN_FACE);
+    }
 }
 
 QFaceRecognition::~QFaceRecognition()

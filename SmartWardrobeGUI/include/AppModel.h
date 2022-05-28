@@ -35,7 +35,7 @@ public:
     bool removeSlot(QString& position);
     void addFace(QString& name, QString& rfid);
 
-    QFaceInfor findFaceInfor(QString faceId);
+    void findFaceInfor(QString faceId, QFaceInfor& faceInfor);
     QString findSlot(QString rfid);
 
     WardrobeDB* m_database;

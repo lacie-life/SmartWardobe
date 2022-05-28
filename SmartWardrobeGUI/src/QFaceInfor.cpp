@@ -1,7 +1,6 @@
 #include "QFaceInfor.h"
 
-QFaceInfor::QFaceInfor(QObject *parent)
-    : QObject{parent}
+QFaceInfor::QFaceInfor()
 {
 
 }
@@ -17,6 +16,11 @@ QFaceInfor::QFaceInfor(QString name, QString rfid, QString type)
 int QFaceInfor::id() const
 {
     return m_id;
+}
+
+QString QFaceInfor::name() const
+{
+    return m_name;
 }
 
 QString QFaceInfor::rfid() const
@@ -37,6 +41,11 @@ QString QFaceInfor::currentPosition() const
 void QFaceInfor::setId(int id)
 {
     m_id = id;
+}
+
+void QFaceInfor::setName(QString name)
+{
+    m_name = name;
 }
 
 void QFaceInfor::setRFID(QString rfid)

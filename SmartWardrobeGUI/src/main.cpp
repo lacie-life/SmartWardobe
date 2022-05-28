@@ -16,5 +16,8 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
+//    QFaceRecognition faceRecognition(nullptr, 0);
+//    faceRecognition.faceTrainer();
+
     return 0;
 }

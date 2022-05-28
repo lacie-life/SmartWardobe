@@ -84,16 +84,36 @@ void AppModel::addFace(QString &name, QString &rfid)
     // add person image to face_db => update model
 }
 
-QFaceInfor AppModel::findFaceInfor(QString faceId)
+void AppModel::findFaceInfor(QString faceId, QFaceInfor& faceInfor)
 {
     QSqlQuery query(m_database->getDBInstance());
+    query.prepare("SELECT * FROM face_db WHERE id = :id");
+    query.bindValue(":id", faceId.toInt());
 
+    query.exec();
+
+    if(query.first()){
+        CONSOLE << query.value("id").toInt();
+        faceInfor.setId(query.value("id").toInt());
+        faceInfor.setName(query.value("name").toString());
+        faceInfor.setRFID(query.value("rfid").toString());
+        faceInfor.setType(query.value("type").toString());
+    }
 }
 
 QString AppModel::findSlot(QString rfid)
 {
     QSqlQuery query(m_database->getDBInstance());
+    query.prepare("SELECT * FROM wardrobe WHERE rfid = :rfid");
+    query.bindValue(":rfid", rfid);
 
+    query.exec();
+
+    if(query.first())
+    {
+        return query.value("slot").toString();
+    }
+    return "";
 }
 
 void AppModel::checkFace(QStringList &names)
@@ -109,16 +129,17 @@ void AppModel::checkFace(QStringList &names)
         m_state = CHECKING_DONE_STATE;
         CONSOLE << "Recognition done!";
         CONSOLE << "Id: " << names.at(0);
+
+        // Check faceId infor
+        findFaceInfor(names.at(0), m_currentFace);
+
+        QString slot = findSlot(m_currentFace.rfid());
+
+        m_currentFace.setCurrentPosition(slot);
+
+        CONSOLE << "Face slot: " << slot;
+        CONSOLE << "Face name: " << m_currentFace.name();
     }
-
-    // Check faceId infor
-    m_currentFace = findFaceInfor(names.at(0));
-
-    QString slot = findSlot(m_currentFace.rfid());
-
-    m_currentFace.setCurrentPosition(slot);
-
-    CONSOLE << "Face slot: " << slot;
 }
 
 void AppModel::setState(APP_STATE state)

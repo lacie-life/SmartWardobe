@@ -6,10 +6,8 @@
 
 class QFaceInfor
 {
-    Q_OBJECT
 public:
-    explicit QFaceInfor(QObject *parent = nullptr);
-
+    QFaceInfor();
     QFaceInfor(QString name, QString rfid, QString type);
     QFaceInfor(int id, QString name, QString rfid, QString type);
 

@@ -24,7 +24,7 @@ class QFaceRecognition : public QObject
 {
     Q_OBJECT
 public:
-    explicit QFaceRecognition(QObject *parent = nullptr);
+    explicit QFaceRecognition(QObject *parent = nullptr, int mode = 1);
     ~QFaceRecognition();
 
     cv::Mat dectectFace(cv::Mat frame);
@@ -44,7 +44,7 @@ private:
     cv::Ptr<cv::face::EigenFaceRecognizer> m_model;
     QString m_currentId;
     int m_imageCount;
-
+    int flag;
 };
 
 #endif // QFACERECOGNITION_H
