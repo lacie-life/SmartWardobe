@@ -16,12 +16,5 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 
-//    QFaceRecognition faceRecognition;
-
-//    cv::Mat img = cv::imread(IMAGE_TEST, cv::IMREAD_UNCHANGED);
-//    QStringList names = faceRecognition.recognition(img);
-
-//    qDebug() << names;
-
     return 0;
 }

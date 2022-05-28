@@ -17,7 +17,7 @@ QCameraCapture::~QCameraCapture()
 bool QCameraCapture::initCamera()
 {
     sl::InitParameters init_params;
-    init_params.camera_resolution = sl::RESOLUTION::HD1080;
+    init_params.camera_resolution = sl::RESOLUTION::HD720;
     init_params.depth_mode = sl::DEPTH_MODE::ULTRA;
     init_params.coordinate_units = sl::UNIT::METER;
 
@@ -69,10 +69,17 @@ void QCameraCapture::stream()
             m_camera.retrieveImage(depth_image_zed, sl::VIEW::DEPTH, sl::MEM::CPU, new_image_size);
 
             // Display image and depth using cv:Mat which share sl:Mat data
-            cv::imshow("Image", image_ocv);
+//            cv::imshow("Image", image_ocv);
 //            cv::imshow("Depth", depth_image_ocv);
 
+            QPixmap img = QPixmap::fromImage(QImage((uchar*)image_ocv.data,
+                                                    image_ocv.cols,
+                                                    image_ocv.rows,
+                                                    static_cast<int>(image_ocv.step),
+                                                    QImage::Format_RGB888).rgbSwapped());
+
             emit frameReady(image_ocv);
+            emit frameUIReady(img);
         }
     }
 }

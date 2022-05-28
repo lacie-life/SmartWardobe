@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QPixmap>
 #include <memory.h>
+#include <QStringList>
 
 #include "WardrobeDB.h"
 #include "QDataHandler.h"
@@ -22,6 +23,7 @@ public:
         CHECKING_STATE,
         NO_CHEKCING_STATE,
         ADD_FACE_STATE,
+        SLOT_UPDATE,
         END_STATE,
     };
 
@@ -30,6 +32,7 @@ public:
     bool addSlot(QString& position);
     bool removeSlot(QString& position);
     void addPerson(QString& name, QString& rfid);
+    void checkSlot(QStringList& position);
 
     WardrobeDB* m_database;
     QDataHandler* m_handler;
@@ -41,6 +44,8 @@ signals:
     void sendIndex(QString index);
     void havePerson();  // start camera widget
     void noPerson();    // close camera widget and switch to wardrobe widget
+    void slotNotifyUI(QString position);
+    void idRecognizedNotify(QString id);
 
 public slots:
     void processImage(cv::Mat frame);

@@ -26,6 +26,7 @@ public:
 
 signals:
     void frameReady(cv::Mat frame);
+    void frameUIReady(QPixmap pixmap);
 
 public slots:
     void stream();

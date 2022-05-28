@@ -166,7 +166,7 @@ QStringList QFaceRecognition::recognition(cv::Mat& frame)
         face_cascade.detectMultiScale(graySacleFrame, faces, 1.1, 3, 0, cv::Size(90, 90));
 
         //number of faces detected
-        //cout << faces.size() << " faces detected" << endl;
+        // CONSOLE << faces.size() << " faces detected";
         std::string faceset = std::to_string(faces.size());
 
         int width = 0, height = 0;
@@ -197,18 +197,18 @@ QStringList QFaceRecognition::recognition(cv::Mat& frame)
             names.append(p_name);
 
             //drawing green rectagle in recognize face
-            rectangle(original, face_i, CV_RGB(0, 255, 0), 1);
+            rectangle(frame, face_i, CV_RGB(0, 255, 0), 1);
             QString text = p_name;
 
             int pos_x = std::max(face_i.tl().x - 10, 0);
             int pos_y = std::max(face_i.tl().y - 10, 0);
 
             //name the person who is in the image
-            cv::putText(original, text.toStdString(), cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
+            cv::putText(frame, text.toStdString(), cv::Point(pos_x, pos_y), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
         }
 
-        cv::putText(original, "No. of Persons detected: " +std::to_string(faces.size()), cv::Point(30, 90), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
-        cv::imshow("Results", original);
+//        cv::putText(frame, "No. of Persons detected: " +std::to_string(faces.size()), cv::Point(30, 90), cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, CV_RGB(0, 255, 0), 1.0);
+//        cv::imshow("Results", frame);
     }
     return names;
 }
@@ -217,6 +217,7 @@ void QFaceRecognition::updateModel()
 {
     m_model->clear();
     m_model->read(EIGEN_FACE);
+    CONSOLE << "Model updated ...";
 }
 
 

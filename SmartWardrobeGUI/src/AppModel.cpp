@@ -12,7 +12,7 @@ AppModel::AppModel(QObject *parent)
     : QObject{parent},
       m_database(WardrobeDB::getInstance())
 {
-    // Mqtt config
+    // Serial config
     // Image processing algorithm setting
     m_faceRecognition = new QFaceRecognition();
     m_handler = new QDataHandler();
@@ -82,20 +82,34 @@ void AppModel::addPerson(QString &name, QString &rfid)
     // add person image to face_db => update model
 }
 
+void AppModel::checkSlot(QStringList &names)
+{
+    // Check position of people recognized
+    // Read user_db => rfid
+    // Check rfid in wardrobedb
+    // send signal to arduino and notify in UI
+    // QSqlQuery query(m_database->getDBInstance());
+}
+
 void AppModel::processImage(cv::Mat frame)
 {
     QStringList names = m_faceRecognition->recognition(frame);
 
-    QPixmap img = QPixmap::fromImage(QImage((uchar*)frame.data,
-                                            frame.cols,
-                                            frame.rows,
-                                            static_cast<int>(frame.step),
-                                            QImage::Format_RGB888).rgbSwapped());
+//    QPixmap img = QPixmap::fromImage(QImage((uchar*)frame.data,
+//                                            frame.cols,
+//                                            frame.rows,
+//                                            static_cast<int>(frame.step),
+//                                            QImage::Format_RGB888).rgbSwapped());
 
-    emit imageReady(img);
+//    emit imageReady(img);
+    if(names.size() > 0)
+    {
+        emit idRecognizedNotify(names.at(0));
+        checkSlot(names);
+    }
 }
 
 void AppModel::extractData(QString &data)
 {
-
+    // Extract data from Arduino
 }
