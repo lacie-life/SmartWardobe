@@ -72,11 +72,6 @@ void QCameraCapture::stream()
             cv::imshow("Image", image_ocv);
 //            cv::imshow("Depth", depth_image_ocv);
 
-//            QPixmap img = QPixmap::fromImage(QImage((uchar*)image_ocv.data,
-//                                                    image_ocv.cols,
-//                                                    image_ocv.rows,
-//                                                    static_cast<int>(image_ocv.step),
-//                                                    QImage::Format_RGB888).rgbSwapped());
             emit frameReady(image_ocv);
         }
     }

@@ -12,11 +12,11 @@ QFaceRecognition::QFaceRecognition(QObject *parent)
     }
     //create algorithm eigenface recognizer
     m_model = cv::face::EigenFaceRecognizer::create();
+    m_model->read(EIGEN_FACE);
 }
 
 QFaceRecognition::~QFaceRecognition()
 {
-
 }
 
 cv::Mat QFaceRecognition::dectectFace(cv::Mat frame)
@@ -135,15 +135,16 @@ void QFaceRecognition::faceTrainer()
 
     CONSOLE << EIGEN_FACE;
     CONSOLE << "Training finished....";
+
     cv::waitKey(10000);
+
+    updateModel();
 }
 
 QStringList QFaceRecognition::recognition(cv::Mat& frame)
 {
-    m_model->read(EIGEN_FACE);
-
-    int img_width = frame.cols;
-    int img_height = frame.rows;
+    int img_width = IMAGE_WIDTH;
+    int img_height = IMAGE_HEIGHT;
 
     QString p_name = "";
     QStringList names;
@@ -210,6 +211,12 @@ QStringList QFaceRecognition::recognition(cv::Mat& frame)
         cv::imshow("Results", original);
     }
     return names;
+}
+
+void QFaceRecognition::updateModel()
+{
+    m_model->clear();
+    m_model->read(EIGEN_FACE);
 }
 
 

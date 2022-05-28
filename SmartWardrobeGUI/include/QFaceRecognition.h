@@ -33,7 +33,8 @@ public:
     void faceTrainer();
     QStringList recognition(cv::Mat& frame);
 
-signals:
+public slots:
+    void updateModel();
 
 private:
     cv::CascadeClassifier face_cascade;

@@ -34,6 +34,6 @@
 #define PLUGINS_SUBFOLDER "/Plugins/"
 
 #define IMAGE_WIDTH 640
-#define IMAGE_HEIGH 480
+#define IMAGE_HEIGHT 480
 
 #endif // APPCONSTANTS_H

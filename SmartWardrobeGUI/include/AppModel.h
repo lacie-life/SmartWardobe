@@ -21,6 +21,7 @@ public:
         NONE_STATE,
         CHECKING_STATE,
         NO_CHEKCING_STATE,
+        ADD_FACE_STATE,
         END_STATE,
     };
 
