@@ -31,9 +31,10 @@ public:
 
     explicit AppModel(QObject *parent = nullptr);
 
-    bool addSlot(QString& position);
+    bool addSlot(QString& position, QString& rfid);
     bool removeSlot(QString& position);
     void addFace(QString& name, QString& rfid);
+    void writeRecord(QString& rfid, QString& position, int state);
 
     void findFaceInfor(QString faceId, QFaceInfor& faceInfor);
     QString findSlot(QString rfid);

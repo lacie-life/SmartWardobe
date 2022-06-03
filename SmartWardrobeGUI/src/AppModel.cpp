@@ -24,8 +24,9 @@ AppModel::AppModel(QObject *parent)
     connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkFace);
 }
 
-bool AppModel::addSlot(QString& position)
+bool AppModel::addSlot(QString& position, QString& rfid)
 {
+    // TODO: update slot with rfid
     QSqlQuery query(m_database->getDBInstance());
     query.prepare("update wardrobe set available='N' where slot= '" + position +"'");
 
@@ -54,6 +55,7 @@ bool AppModel::addSlot(QString& position)
 
 bool AppModel::removeSlot(QString& position)
 {
+    // TODO: check and remove rfid
     QSqlQuery query(m_database->getDBInstance());
     query.prepare("update wardrobe set available='Y' where slot= '" + position +"'");
 
@@ -66,7 +68,6 @@ bool AppModel::removeSlot(QString& position)
     {
         if(query.numRowsAffected() > 0)
         {
-
             CONSOLE << "read was successful "<< query.lastQuery();
         }
         else
@@ -84,6 +85,11 @@ void AppModel::addFace(QString &name, QString &rfid)
 {
     // Add person's name and rfid to db => create id for face_db
     // add person image to face_db => update model
+}
+
+void AppModel::writeRecord(QString &rfid, QString &position, int state)
+{
+    // TODO: write record of rfid to db/text/csv
 }
 
 void AppModel::findFaceInfor(QString faceId, QFaceInfor& faceInfor)
