@@ -54,6 +54,7 @@ signals:
     void slotNotifyUI(QString position);
     void idRecognizedNotify(QString faceId);
     void stateChanged();
+    void rfidReceived(QString rfid);
 
 public slots:
     void processImage(cv::Mat frame);

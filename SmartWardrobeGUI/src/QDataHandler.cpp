@@ -77,7 +77,7 @@ void QDataHandler::writeData(const QByteArray &data)
 
 void QDataHandler::readData()
 {
-    QByteArray data = m_serial->readAll();
+    QByteArray data = m_serial->readLine();
     CONSOLE << "UART:" << data;
 
     QString _data = QString(data);

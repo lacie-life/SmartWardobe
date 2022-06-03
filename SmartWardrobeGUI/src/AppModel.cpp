@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QImage>
 #include <QPixmap>
+#include <QStringList>
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
@@ -160,4 +161,10 @@ void AppModel::extractData(QString &data)
 {
     // Extract data from Arduino
     CONSOLE << "Arduino sent: " << data;
+    QStringList extract = data.split(":");
+
+    if(extract.at(0) == "rfid"){
+        CONSOLE << extract.at(1);
+        emit rfidReceived(extract.at(1));
+    }
 }
