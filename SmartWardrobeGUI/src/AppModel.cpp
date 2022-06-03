@@ -15,8 +15,9 @@ AppModel::AppModel(QObject *parent)
 {
     // Serial config
     // Image processing algorithm setting
-    m_faceRecognition = new QFaceRecognition();
+    m_faceRecognition = new QFaceRecognition(nullptr, 0);
     m_handler = new QDataHandler();
+    m_handler->openSerialPort();
 
     connect(m_handler, &QDataHandler::dataReady, this, &AppModel::extractData);
     connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkFace);
@@ -158,4 +159,5 @@ void AppModel::processImage(cv::Mat frame)
 void AppModel::extractData(QString &data)
 {
     // Extract data from Arduino
+    CONSOLE << "Arduino sent: " << data;
 }

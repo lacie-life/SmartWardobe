@@ -34,7 +34,7 @@ void QDataHandler::openSerialPort()
                     + QObject::tr("Product Identifier:") + (info.hasProductIdentifier() ? QString::number(info.productIdentifier(), 16) : QString()) + "\n"
                     + QObject::tr("Busy:") + (info.isBusy() ? QObject::tr("Yes") : QObject::tr("No")) + "\n";
 
-        if(!info.isBusy() && (info.description().contains("Arduino") || info.manufacturer().contains("Arduino")))
+        if(!info.isBusy() && (info.description().contains("1a86") || info.manufacturer().contains("1a86")))
             portToUse = info;
         CONSOLE << s;
     }
@@ -50,7 +50,7 @@ void QDataHandler::openSerialPort()
     // Open it if it isn't busy
 
     m_serial->setPortName(portToUse.portName());
-    m_serial->setBaudRate(QSerialPort::Baud115200);
+    m_serial->setBaudRate(QSerialPort::Baud9600);
     m_serial->setDataBits(QSerialPort::Data8);
     m_serial->setParity(QSerialPort::NoParity);
     m_serial->setStopBits(QSerialPort::OneStop);
