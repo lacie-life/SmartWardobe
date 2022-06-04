@@ -1,5 +1,6 @@
-## Jetson config
+# Jetson config
 
+## Qt lib install 
 ```
 sudo apt-get install qtbase5-dev
 sudo apt-get install qt5-default qtcreator
@@ -14,3 +15,8 @@ sudo apt-get install libqt5serialport5
 sudo apt-get install libqt5serialport5-dev
 ```
 
+## OpenCV 4.2
+
+## ZED SDK 3.6
+
+## SQLite (Option)
