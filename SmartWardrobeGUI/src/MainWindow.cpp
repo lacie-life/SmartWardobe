@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_stackWidget->addWidget(m_wardrobeWidget);
     m_stackWidget->addWidget(m_faceInforWidget);
 
-    m_stackWidget->setCurrentWidget(m_cameraWidget);
+    m_stackWidget->setCurrentWidget(m_wardrobeWidget);
 
     setCentralWidget(m_stackWidget);
 

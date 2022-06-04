@@ -14,3 +14,8 @@ QFaceInforWidget::~QFaceInforWidget()
 {
     delete ui;
 }
+
+void QFaceInforWidget::loadFaceInfor()
+{
+
+}

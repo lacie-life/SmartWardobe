@@ -15,7 +15,9 @@
 
 RFID RC522(SDA_DIO, RESET_DIO);
 
- String id = "rfid:";
+String id = "rfid:";
+String idx = "set:";
+String idx2 = "get:";
 
 void setup()
 { 
@@ -29,6 +31,7 @@ void setup()
 void loop()
 {
   String b = "";
+  String mode = "1";
   /* Has a card been detected? */
   if (RC522.isCard())
   {
@@ -38,8 +41,10 @@ void loop()
     {
       b = b + String(RC522.serNum[i]);
     }
+    idx = idx + "A_1";
     id = id + b;
-    Serial.print(id);
+    String data = idx + ":" + id; 
+    Serial.print(data);
   }
   delay(1000);
 }

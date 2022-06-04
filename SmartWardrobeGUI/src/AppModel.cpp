@@ -24,11 +24,12 @@ AppModel::AppModel(QObject *parent)
     connect(m_faceRecognition, &QFaceRecognition::recognized, this, &AppModel::checkFace);
 }
 
-bool AppModel::addSlot(QString& position, QString& rfid)
+bool AppModel::addSlot(QString position, QString rfid)
 {
     // TODO: update slot with rfid
     QSqlQuery query(m_database->getDBInstance());
-    query.prepare("update wardrobe set available='N' where slot= '" + position +"'");
+    query.prepare("update wardrobe set available='N', rfid= :rfid where slot= '" + position +"'");
+    query.bindValue(":rfid", rfid);
 
     if(!query.exec())
     {
@@ -57,7 +58,7 @@ bool AppModel::removeSlot(QString& position)
 {
     // TODO: check and remove rfid
     QSqlQuery query(m_database->getDBInstance());
-    query.prepare("update wardrobe set available='Y' where slot= '" + position +"'");
+    query.prepare("update wardrobe set available='Y', rfid='' where slot= '" + position +"'");
 
     if(!query.exec())
     {
@@ -168,9 +169,16 @@ void AppModel::extractData(QString &data)
     // Extract data from Arduino
     CONSOLE << "Arduino sent: " << data;
     QStringList extract = data.split(":");
+    CONSOLE << extract;
 
-    if(extract.at(0) == "rfid"){
+    if(extract.at(0) == "set"){
         CONSOLE << extract.at(1);
-        emit rfidReceived(extract.at(1));
+        bool result = addSlot(extract.at(1), extract.at(3));
+        if (result){
+            CONSOLE << "Add slot success";
+        }
+        else{
+            CONSOLE << "Add slot fail";
+        }
     }
 }
