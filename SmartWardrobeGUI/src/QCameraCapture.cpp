@@ -16,6 +16,10 @@ QCameraCapture::~QCameraCapture()
 
 bool QCameraCapture::initCamera()
 {
+    if(m_camera.isOpened()){
+        m_camera.close();
+    }
+
     sl::InitParameters init_params;
     init_params.camera_resolution = sl::RESOLUTION::HD720;
     init_params.depth_mode = sl::DEPTH_MODE::ULTRA;
@@ -82,12 +86,18 @@ void QCameraCapture::stream()
             emit frameUIReady(img);
         }
     }
+
+    image_zed.free();
+    depth_image_zed.free();
 }
 
 void QCameraCapture::stop()
 {
     stopped = true;
+
     m_camera.close();
+
+    cv::waitKey(100);
 }
 
 cv::Mat QCameraCapture::slMat2cvMat(sl::Mat &input)

@@ -9,6 +9,8 @@ QCameraWidget::QCameraWidget(QWidget *parent, AppModel *model) :
     m_model = model;
     m_camera = new QCameraCapture();
 
+    m_camera->moveToThread(new QThread(this));
+
     connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
     connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
 }
@@ -25,9 +27,8 @@ QCameraWidget::~QCameraWidget()
 void QCameraWidget::startWidget()
 {
     m_camera->initCamera();
-    m_model->setState(AppModel::CHECKING_STATE);
 
-    m_camera->moveToThread(new QThread(this));
+    m_model->setState(AppModel::CHECKING_STATE);
 
     connect(m_camera->thread(), &QThread::started, m_camera, &QCameraCapture::stream);
     connect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);

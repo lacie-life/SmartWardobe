@@ -32,7 +32,7 @@
 *.app
 
 build-SmartWardrobeGUI-Desktop_Qt_5_15_2_GCC_64bit-Debug/
-
 build-SmartWardrobeGUI-Desktop-Default/
+build-SmartWardrobeGUI-Desktop-Debug/
 
 SmartWardrobeGUI/CMakeLists.txt.user
