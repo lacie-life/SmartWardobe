@@ -1,7 +1,0 @@
-# Hashes of file build rules.
-96bb2667bcd59c328b9746bb63fa8718 CMakeFiles/SmartWardrobeGUI_autogen
-8c4e016728a5b48349f173bbeeae03ee ui_mainwindow.h
-bda5f0b1e56d15d7b54982c970641601 ui_qaddfacedialog.h
-f3100b274efdd4f6cfd49ec418b84cc3 ui_qcamerawidget.h
-783696fb3727d2e7b0ea82f393aca120 ui_qfaceinforwidget.h
-f14f78d7d602e44a8731e301e2096411 ui_qwardrobewidget.h

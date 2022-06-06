@@ -1,4 +1,0 @@
-/home/jun/Github/SmartWardrobe/build-SmartWardrobeGUI-Desktop-Default/CMakeFiles/rebuild_cache.dir
-/home/jun/Github/SmartWardrobe/build-SmartWardrobeGUI-Desktop-Default/CMakeFiles/SmartWardrobeGUI.dir
-/home/jun/Github/SmartWardrobe/build-SmartWardrobeGUI-Desktop-Default/CMakeFiles/edit_cache.dir
-/home/jun/Github/SmartWardrobe/build-SmartWardrobeGUI-Desktop-Default/CMakeFiles/SmartWardrobeGUI_autogen.dir
