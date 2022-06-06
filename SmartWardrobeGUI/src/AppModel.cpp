@@ -148,6 +148,8 @@ void AppModel::checkFace(QStringList &names)
 
         CONSOLE << "Face slot: " << slot;
         CONSOLE << "Face name: " << m_currentFace.name();
+        CONSOLE << "Face type: " << m_currentFace.type();
+        CONSOLE << "Face slot: " << m_currentFace.currentPosition();
 
         emit recognitionDone();
     }

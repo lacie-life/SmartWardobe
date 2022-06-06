@@ -17,5 +17,8 @@ QFaceInforWidget::~QFaceInforWidget()
 
 void QFaceInforWidget::loadFaceInfor()
 {
-
+    ui->nameEdit->setText(m_model->m_currentFace.name());
+    ui->cvEdit->setText(m_model->m_currentFace.type());
+    ui->positionEdit->setText(m_model->m_currentFace.currentPosition());
 }
+

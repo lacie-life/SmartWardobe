@@ -43,8 +43,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_model, &AppModel::recognitionDone, this, [this] {
         CONSOLE << "Checking done";
+//        m_faceInforWidget->loadFaceInfor();
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
-        m_cameraWidget->stopWidget();;
+        m_cameraWidget->stopWidget();
     });
 }
 
