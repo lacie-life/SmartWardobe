@@ -5,6 +5,9 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QSqlError>
+#include <QSvgRenderer>
+#include <QPainter>
+#include <QImage>
 
 QWardrobeWidget::QWardrobeWidget(QWidget *parent, AppModel *model) :
     QWidget(parent),
@@ -43,6 +46,15 @@ void QWardrobeWidget::updateUI()
         {   qDebug() << "label found "<<sLabel;
             if(query.value(1).toString().compare("N") == 0)
             {
+//                QSvgRenderer renderer(QString(UNAVAILABLE_SLOT));
+//                // Prepare a QImage with desired characteritisc
+//                QImage image(ptr->width(), ptr->height(), QImage::Format_ARGB32);
+//                image.fill(0xaaA08080);  // partly transparent red-ish background
+//                // Get QPainter that paints to the image
+//                QPainter painter(&image);
+//                renderer.render(&painter);
+
+//                QPixmap pm = QPixmap::fromImage(image);
                 QPixmap pm(UNAVAILABLE_SLOT);
                 ptr->setPixmap(pm);
                 ptr->setScaledContents(true);
@@ -50,6 +62,16 @@ void QWardrobeWidget::updateUI()
             }
             else
             {
+//                QSvgRenderer renderer(QString(AVAILABLE_SLOT));
+//                // Prepare a QImage with desired characteritisc
+//                QImage image(ptr->width(), ptr->height(), QImage::Format_ARGB32);
+//                image.fill(0xaaA08080);  // partly transparent red-ish background
+//                // Get QPainter that paints to the image
+//                QPainter painter(&image);
+//                renderer.render(&painter);
+
+//                QPixmap pm = QPixmap::fromImage(image);
+
                 QPixmap pm(AVAILABLE_SLOT);
                 ptr->setPixmap(pm);
                 ptr->setScaledContents(true);

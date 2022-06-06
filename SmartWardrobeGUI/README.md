@@ -13,6 +13,8 @@ sudo apt-get install qtquickcontrols2-5-dev
 sudo apt-get install qtquickcontrols2-5-doc qtquickcontrols2-5-doc-html qtquickcontrols2-5-examples
 sudo apt-get install libqt5serialport5
 sudo apt-get install libqt5serialport5-dev
+sudo apt install libqt5svg5-dev
+sudo apt install libqt5x11extras5-dev
 ```
 
 ## OpenCV 4.2
