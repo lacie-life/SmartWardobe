@@ -16,7 +16,7 @@ AppModel::AppModel(QObject *parent)
 {
     // Serial config
     // Image processing algorithm setting
-    m_faceRecognition = new QFaceRecognition(nullptr, 0);
+    m_faceRecognition = new QFaceRecognition(nullptr, 1);
     m_handler = new QDataHandler();
     m_handler->openSerialPort();
 
@@ -148,6 +148,8 @@ void AppModel::checkFace(QStringList &names)
 
         CONSOLE << "Face slot: " << slot;
         CONSOLE << "Face name: " << m_currentFace.name();
+
+        emit recognitionDone();
     }
 }
 
@@ -173,12 +175,23 @@ void AppModel::extractData(QString &data)
 
     if(extract.at(0) == "set"){
         CONSOLE << extract.at(1);
-        bool result = addSlot(extract.at(1), extract.at(3));
+        bool result = addSlot(extract.at(1), extract.at(2));
         if (result){
             CONSOLE << "Add slot success";
         }
         else{
             CONSOLE << "Add slot fail";
+        }
+    }
+    else if(extract.at(0) == "p") {
+        CONSOLE << extract.at(1);
+        if (extract.at(1) == "1"){
+            CONSOLE << "Person checked";
+            emit havePerson();
+        }
+        else{
+            CONSOLE << "No person";
+            emit noPerson();
         }
     }
 }

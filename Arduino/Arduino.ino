@@ -48,16 +48,16 @@ void loop()
 //    id = id + b;
 //    String data = idx + ":" + id; 
 //    Serial.print(data);
-
+      
      if (!check){
-      p_check = p_check + "1"; 
+      b = p_check + "1"; 
       check = !check;
      }else {
-      p_check = p_check + "0"; 
+      b = p_check + "0"; 
       check = !check;
      }
      
-     Serial.print(p_check);
+     Serial.print(b);
 
   }
   delay(1000);

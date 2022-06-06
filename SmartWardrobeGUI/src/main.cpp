@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<cv::Mat>("cv::Mat");
     MainWindow w;
     w.show();
-    return a.exec();
 
-    return 0;
+//    QFaceRecognition face(nullptr, 0);
+//    face.faceTrainer();
+
+    return a.exec();
 }
