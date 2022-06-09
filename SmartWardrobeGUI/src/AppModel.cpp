@@ -8,6 +8,7 @@
 #include <QImage>
 #include <QPixmap>
 #include <QStringList>
+#include <QDateTime>g
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
@@ -91,6 +92,22 @@ void AppModel::addFace(QString &name, QString &rfid)
 void AppModel::writeRecord(QString &rfid, QString &position, int state)
 {
     // TODO: write record of rfid to db/text/csv
+    if (!m_database->getDBInstance().tables().contains(rfid))
+    {
+        QSqlQuery query(m_database->getDBInstance());
+        query.prepare("CREATE TABLE :rfid (id INTEGER PRIMARY KEY AUTOINCREMENT, action text NOT NULL, time text NOT NULL)");
+        query.bindValue(":rfid", rfid);
+        query.exec();
+
+        if (query.lastError().type() == QSqlError::ErrorType::NoError) {
+            qDebug() << "Query OK:"  << query.lastQuery();
+        } else {
+            qWarning() << "Query KO:" << query.lastError().text();
+            qWarning() << "Query text:" << query.lastQuery();
+        }
+
+        query.prepare("INSERT INTO :rfid (action, time) VALUES (:action, :time)");
+    }
 }
 
 void AppModel::findFaceInfor(QString faceId, QFaceInfor& faceInfor)
