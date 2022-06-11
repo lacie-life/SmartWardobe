@@ -106,7 +106,19 @@ void AppModel::writeRecord(QString &rfid, QString &position, int state)
             qWarning() << "Query text:" << query.lastQuery();
         }
 
+        QDateTime now = QDateTime::currentDateTime();
         query.prepare("INSERT INTO :rfid (action, time) VALUES (:action, :time)");
+        query.bindValue(":rfid", rfid);
+        query.bindValue(":action", QString(state));
+        query.bindValue(":time", now.toString());
+        query.exec();
+
+        if (query.lastError().type() == QSqlError::ErrorType::NoError) {
+            qDebug() << "Query OK:"  << query.lastQuery();
+        } else {
+            qWarning() << "Query KO:" << query.lastError().text();
+            qWarning() << "Query text:" << query.lastQuery();
+        }
     }
 }
 
