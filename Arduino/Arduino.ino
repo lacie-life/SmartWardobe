@@ -6,7 +6,7 @@
  *  Reset     5
  *  SPI SDA   53
  *  SPI MOSI  51
- *  SPI MISO  12
+ *  SPI MISO  50
  *  SPI SCK   52
  */
 
