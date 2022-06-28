@@ -28,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Information</string>
+    <string>Thong tin</string>
    </property>
   </widget>
   <widget class="QLabel" name="name">
@@ -80,7 +80,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="cvEdit">
@@ -93,7 +93,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="positionEdit">
@@ -106,7 +106,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
  </widget>

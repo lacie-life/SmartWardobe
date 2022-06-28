@@ -64,14 +64,27 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>520</y>
-     <width>471</width>
+     <x>180</x>
+     <y>510</y>
+     <width>171</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="idFaceLabel">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>520</y>
+     <width>81</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ID Face:</string>
    </property>
   </widget>
  </widget>

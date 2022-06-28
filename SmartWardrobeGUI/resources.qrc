@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>data/res/available.jpg</file>
+        <file>data/res/background.jpg</file>
+        <file>data/res/check.png</file>
+        <file>data/res/checkbox.svg</file>
+        <file>data/res/checkbox-empty.svg</file>
+        <file>data/res/close.png</file>
+        <file>data/res/ftcheckedbox.svg</file>
+        <file>data/res/ftemptybox.svg</file>
+        <file>data/res/unavailable.jpg</file>
+        <file>data/res/icon.png</file>
+    </qresource>
+</RCC>

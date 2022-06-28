@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>Smart Wadrobe</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(:/images/data/res/background.jpg);</string>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -1,9 +1,11 @@
 #include "MainWindow.h"
+#include "QDataHandler.h"
+#include "AppConstants.h"
+
 #include "ui_mainwindow.h"
 
 #include <QDebug>
-#include "QDataHandler.h"
-#include "AppConstants.h"
+#include <QIcon>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-//    setWindowIcon();
+    setWindowIcon(QIcon(":/images/data/res/icon.png"));
 
     m_model = new AppModel();
 
