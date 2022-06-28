@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+//    setWindowIcon();
+
     m_model = new AppModel();
 
     m_cameraWidget = new QCameraWidget(nullptr, m_model);
@@ -43,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(m_model, &AppModel::recognitionDone, this, [this] {
         CONSOLE << "Checking done";
-//        m_faceInforWidget->loadFaceInfor();
+        m_faceInforWidget->loadFaceInfor();
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
         m_cameraWidget->stopWidget();
     });

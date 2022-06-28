@@ -16,10 +16,6 @@ QCameraCapture::~QCameraCapture()
 
 bool QCameraCapture::initCamera()
 {
-    if(m_camera.isOpened()){
-        m_camera.close();
-    }
-
     sl::InitParameters init_params;
     init_params.camera_resolution = sl::RESOLUTION::HD720;
     init_params.depth_mode = sl::DEPTH_MODE::ULTRA;
@@ -71,10 +67,6 @@ void QCameraCapture::stream()
 
             // retrieve CPU -> the ocv reference is therefore updated
             m_camera.retrieveImage(depth_image_zed, sl::VIEW::DEPTH, sl::MEM::CPU, new_image_size);
-
-            // Display image and depth using cv:Mat which share sl:Mat data
-//            cv::imshow("Image", image_ocv);
-//            cv::imshow("Depth", depth_image_ocv);
 
             QPixmap img = QPixmap::fromImage(QImage((uchar*)image_ocv.data,
                                                     image_ocv.cols,
