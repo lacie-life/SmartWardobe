@@ -36,3 +36,4 @@ build-SmartWardrobeGUI-Desktop-Default/
 build-SmartWardrobeGUI-Desktop-Debug/
 
 SmartWardrobeGUI/CMakeLists.txt.user
+SmartWardrobeGUI/build/
