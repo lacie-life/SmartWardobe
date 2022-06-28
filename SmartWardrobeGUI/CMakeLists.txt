@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Widgets Sql SerialPort Svg REQUIRED)
 
 find_package(ZED 3 REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4.2 REQUIRED)
 find_package(CUDA REQUIRED)
 
 include_directories(${CUDA_INCLUDE_DIRS})

@@ -8,7 +8,7 @@
 #include <QImage>
 #include <QPixmap>
 #include <QStringList>
-#include <QDateTime>g
+#include <QDateTime>
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
