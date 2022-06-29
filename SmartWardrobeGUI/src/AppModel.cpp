@@ -186,6 +186,7 @@ void AppModel::checkFace(QStringList &names)
 
 void AppModel::setState(APP_STATE state)
 {
+    CONSOLE << "STATE: " << state;
     m_state = state;
 }
 
@@ -217,12 +218,17 @@ void AppModel::extractData(QString &data)
     else if(extract.at(0) == "p") {
         CONSOLE << extract.at(1);
         if (extract.at(1) == "1"){
-            CONSOLE << "Person checked";
-            emit havePerson();
+            if (m_state == APP_STATE::NO_CHEKCING_STATE){
+                CONSOLE << "Person checked";
+                emit havePerson();
+            }
         }
-        else{
-            CONSOLE << "No person";
-            emit noPerson();
+        else if (extract.at(1) == "0"){
+            if (m_state == APP_STATE::CHECKING_STATE || m_state == APP_STATE::CHECKING_DONE_STATE)
+            {
+                CONSOLE << "No person";
+                emit noPerson();
+            }
         }
     }
 }

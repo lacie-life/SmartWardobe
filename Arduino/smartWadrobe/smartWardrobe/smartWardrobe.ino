@@ -76,7 +76,7 @@ void readDistance(){
     else {
       isperson = true;
       checkcount1 = 0;
-      Serial.println("p:1");
+      Serial.print("p:1");
     }
   }
   else if (distance >=  35  && isperson){
@@ -86,7 +86,7 @@ void readDistance(){
     else {
       isperson = false;
       checkcount2 = 0;
-      Serial.println("p:0");
+      Serial.print("p:0");
     }
   }
   

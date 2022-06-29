@@ -35,21 +35,26 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_model, &AppModel::havePerson, this, [this] {
         CONSOLE << "Start Person checking";
         m_stackWidget->setCurrentWidget(m_cameraWidget);
-        m_cameraWidget->startWidget();
+        m_model->setState(AppModel::APP_STATE::CHECKING_STATE);
+        if (!m_cameraWidget->getCameraState()){
+            m_cameraWidget->startWidget();
+        }
     });
 
     // Need check APP_STATE before emit this signal
     connect(m_model, &AppModel::noPerson, this, [this] {
         CONSOLE << "Stop Person checking";
+        m_model->setState(AppModel::APP_STATE::NO_CHEKCING_STATE);
         m_stackWidget->setCurrentWidget(m_wardrobeWidget);
-        m_cameraWidget->stopWidget();
+        // m_cameraWidget->stopWidget();
     });
 
     connect(m_model, &AppModel::recognitionDone, this, [this] {
         CONSOLE << "Checking done";
+        m_model->setState(AppModel::APP_STATE::CHECKING_DONE_STATE);
         m_faceInforWidget->loadFaceInfor();
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
-        m_cameraWidget->stopWidget();
+        // m_cameraWidget->stopWidget();
     });
 }
 
