@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowIcon(QIcon(":/images/data/res/icon.png"));
+    setWindowIcon(QIcon(":/images/data/res/nurses.png"));
 
     m_model = new AppModel();
 

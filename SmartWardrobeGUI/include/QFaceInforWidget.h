@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "AppModel.h"
-#include "AppConstants.h"
 
 namespace Ui {
 class QFaceInforWidget;

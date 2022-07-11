@@ -10,5 +10,11 @@
         <file>data/res/ftemptybox.svg</file>
         <file>data/res/unavailable.jpg</file>
         <file>data/res/icon.png</file>
+        <file>data/res/background1.jpg</file>
+        <file>data/res/1470189.jpg</file>
+        <file>data/res/nurses.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>../.gitignore</file>
     </qresource>
 </RCC>

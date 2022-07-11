@@ -21,8 +21,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-private slots:
-
 private:
     Ui::MainWindow *ui;
     AppModel* m_model;

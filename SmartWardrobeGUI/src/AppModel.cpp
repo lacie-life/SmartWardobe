@@ -174,12 +174,21 @@ void AppModel::checkFace(QStringList &names)
         QString slot = findSlot(m_currentFace.rfid());
 
         m_currentFace.setCurrentPosition(slot);
+        QByteArray opendoor = "d:1";
 
         CONSOLE << "Face slot: " << slot;
         CONSOLE << "Face name: " << m_currentFace.name();
         CONSOLE << "Face type: " << m_currentFace.type();
         CONSOLE << "Face slot: " << m_currentFace.currentPosition();
+        if(m_currentFace.type() != QString("staff")){
+            CONSOLE << m_currentFace.type();
+            QByteArray getslot = m_currentFace.currentPosition().toUtf8();
 
+            m_handler->writeData(opendoor + getslot);
+        }
+        else {
+            m_handler->writeData(opendoor);
+        }
         emit recognitionDone();
     }
 }
@@ -229,6 +238,12 @@ void AppModel::extractData(QString &data)
                 CONSOLE << "No person";
                 emit noPerson();
             }
+        }
+        else if (extract.at(0)== "open"){
+            QString opencheck = "o";
+            QByteArray openchecksend = opencheck.toUtf8();
+            m_handler->writeData(openchecksend);
+
         }
     }
 }
