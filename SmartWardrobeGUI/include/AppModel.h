@@ -56,6 +56,7 @@ signals:
     void idRecognizedNotify(QString faceId);
     void stateChanged();
     void rfidReceived(QString rfid);
+    void doorClose();
 
 public slots:
     void processImage(cv::Mat frame);
@@ -66,6 +67,7 @@ public slots:
 public:
     APP_STATE m_state;
     QFaceInfor m_currentFace;
+    bool doorState;
 };
 
 #endif // APPMODEL_H

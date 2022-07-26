@@ -227,7 +227,7 @@ void AppModel::extractData(QString &data)
     else if(extract.at(0) == "p") {
         CONSOLE << extract.at(1);
         if (extract.at(1) == "1"){
-            if (m_state == APP_STATE::NO_CHECKING_STATE){
+            if (m_state == APP_STATE::NO_CHECKING_STATE && !doorState){
                 CONSOLE << "Person checked";
                 emit havePerson();
             }
@@ -249,9 +249,10 @@ void AppModel::extractData(QString &data)
     else if (extract.at(0) == "check")
     {
         CONSOLE << extract.at(1);
-        if (extract.at(1) == "door")
+        if (extract.at(1) == "opened")
         {
             CONSOLE << "Door opened";
+            doorState = true;
         }
         else if (extract.at(1) == "get")
         {
@@ -260,6 +261,12 @@ void AppModel::extractData(QString &data)
         else if (extract.at(1) == "set")
         {
             CONSOLE << "set done";
+        }
+        else if (extract.at(1) == "closed")
+        {
+            CONSOLE << "Door closed";
+            doorState = false;
+            emit doorClose();
         }
     }
 }
