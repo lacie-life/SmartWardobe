@@ -23,7 +23,7 @@ public:
         NONE_STATE,
         CHECKING_STATE, // when received signal havePerson() => change to QCameraWidget => open camera + checking
         CHECKING_DONE_STATE, // when checking done => have face infor => change to QFaceInforWidget
-        NO_CHEKCING_STATE, // when face dont have in DB or no person before machine => change to QWardrobeWidget
+        NO_CHECKING_STATE, // when face dont have in DB or no person before machine => change to QWardrobeWidget
         ADD_FACE_STATE, // when update face_db (pending state)
         SLOT_UPDATE, // when recived signal wardrobeUpdate() => change to QWardrobeWidget and wait to wardobeUpdateDone() => update UI
         END_STATE,
