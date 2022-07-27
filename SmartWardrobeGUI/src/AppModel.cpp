@@ -240,7 +240,7 @@ void AppModel::extractData(QString &data)
             }
         }
         else if (extract.at(0)== "open"){
-            QString opencheck = "o";
+            QString opencheck = "opencheck";
             QByteArray openchecksend = opencheck.toUtf8();
             m_handler->writeData(openchecksend);
 

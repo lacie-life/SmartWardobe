@@ -23,8 +23,8 @@
 
 #define DB_PATH "./data/wardrobe.db"
 
-#define AVAILABLE_SLOT "./data/res/check.png"
-#define UNAVAILABLE_SLOT "./data/res/close.png"
+#define AVAILABLE_SLOT "./data/res/open-box.png"
+#define UNAVAILABLE_SLOT "./data/res/archive.png"
 
 #define FACE_CASCADE "./data/haarcascade_frontalface_alt.xml"
 #define FACE_IMAGE "/data/face_db/"
