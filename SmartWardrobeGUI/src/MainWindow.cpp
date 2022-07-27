@@ -56,6 +56,12 @@ MainWindow::MainWindow(QWidget *parent)
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
         // m_cameraWidget->stopWidget();
     });
+
+    connect(m_model, &AppModel::doorClose, this, [this] {
+        CONSOLE << "Return no checking state";
+        m_model->setState(AppModel::APP_STATE::NO_CHECKING_STATE);
+        m_stackWidget->setCurrentWidget(m_wardrobeWidget);
+    });
 }
 
 MainWindow::~MainWindow()
