@@ -127,7 +127,7 @@ void slot3(){
   if (digitalRead(20) == HIGH){
   message = "";
   message += idx;
-  message += "check:set:A_3:";
+  message += "A_3:";
  
   readRFID();
   }
@@ -202,9 +202,6 @@ void readSerialString(){
       Serial.println("opendone");
     }
     else if (opendoor == 'o'){
-      checkinterupt = true;
-    }
-    else if (opendoor == 'A'){
       checkinterupt = true;
     }
   
