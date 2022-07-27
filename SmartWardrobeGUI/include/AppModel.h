@@ -32,7 +32,7 @@ public:
     explicit AppModel(QObject *parent = nullptr);
 
     bool addSlot(QString position, QString rfid);
-    bool removeSlot(QString& position);
+    bool removeSlot(QString position);
     void addFace(QString& name, QString& rfid);
     void writeRecord(QString& rfid, QString& position, int state);
 
@@ -44,6 +44,7 @@ public:
     QFaceRecognition* m_faceRecognition;
 
 signals:
+    void getSlotDone(QString position);
     void slotUpdate(); // update UI signal
     void wardrobeUpdate();
     void wardrobeUpdateDone();

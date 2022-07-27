@@ -127,7 +127,7 @@ void slot3(){
   if (digitalRead(20) == HIGH){
   message = "";
   message += idx;
-  message += "A_3:";
+  message += "check:set:A_3:";
  
   readRFID();
   }

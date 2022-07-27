@@ -56,7 +56,7 @@ bool AppModel::addSlot(QString position, QString rfid)
     return true;
 }
 
-bool AppModel::removeSlot(QString& position)
+bool AppModel::removeSlot(QString position)
 {
     // TODO: check and remove rfid
     QSqlQuery query(m_database->getDBInstance());
@@ -227,14 +227,15 @@ void AppModel::extractData(QString &data)
     }
     else if(extract.at(0) == "p") {
         CONSOLE << extract.at(1);
-        if (extract.at(1) == "1\r\n"){
-            if (m_state == APP_STATE::NO_CHECKING_STATE || !doorState){
+        if ((extract.at(1) == "1\r\n") && !doorState){
+            if (m_state == APP_STATE::NO_CHECKING_STATE){
+                CONSOLE << doorState;
                 CONSOLE << "Person checked";
                 emit havePerson();
             }
         }
-        else if (extract.at(1) == "0\r\n"){
-            if (m_state == APP_STATE::CHECKING_STATE || m_state == APP_STATE::CHECKING_DONE_STATE)
+        else if ((extract.at(1) == "0\r\n") && doorState){
+            if ((m_state == APP_STATE::CHECKING_STATE))
             {
                 CONSOLE << "No person";
                 emit noPerson();
@@ -258,6 +259,7 @@ void AppModel::extractData(QString &data)
         else if (extract.at(1) == "get\r\n")
         {
             CONSOLE << "get done";
+            removeSlot(m_currentFace.currentPosition());
         }
         else if (extract.at(1) == "set\r\n")
         {
