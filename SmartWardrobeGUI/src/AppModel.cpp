@@ -13,7 +13,8 @@
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
       m_database(WardrobeDB::getInstance()),
-      m_state(NO_CHEKCING_STATE)
+      m_state(NO_CHECKING_STATE),
+      doorState(false)
 {
     // Serial config
     // Image processing algorithm setting

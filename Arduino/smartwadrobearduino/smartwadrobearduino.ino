@@ -160,82 +160,87 @@ void readSerialString(){
   String incomingString;
   if (Serial.available() > 0) {
     // read the incoming string:
-    incomingString = Serial.readString();
+    incomingString = Serial.readStringUntil('\n');
     checkgetslot = true;
     Serial.print(incomingString);
-  }
-  else{
-    checkgetslot = false;
-  }
-  char opendoor = "";
-  char slot = "";
-  if (incomingString.length() == 3){
-    opendoor = incomingString.charAt(0);  
-  }
-  else {
-    opendoor = incomingString.charAt(0);
-    slot = incomingString.charAt(5);  
-  }
+    Serial.print(incomingString.length());
+
+    char opendoor = "";
+    char slot = "";
+    if (incomingString.length() == 4){
+      opendoor = incomingString.charAt(0);  
+      Serial.print(opendoor);
+    }
+    else {
+      opendoor = incomingString.charAt(0);
+      slot = incomingString.charAt(5);  
+      Serial.print(incomingString.charAt(5));
+    }
+
+    if(opendoor == 'd'){
+      checkinterupt = false;
+      digitalWrite(15,LOW);
+      delay(3000);
+      digitalWrite(15,HIGH); 
+      Serial.print("opendone");
+    }
+    else if (opendoor == 'o'){
+      checkinterupt = true;
+    }
+    else if (opendoor == 'A'){
+      checkinterupt = true;
+    }
   
-  
-  bool getcheck= true;
-  switch (slot){
-    case '1':
-      digitalWrite(8,HIGH); //8
-      while(getcheck){
-      if (digitalRead(18)){
-        digitalWrite(6,LOW);
-        Serial.print("checkdone1");
-        getcheck = false;
-      }
-      }
+    bool getcheck= true;
+    switch (slot){
+      case '1':
+        digitalWrite(8,HIGH); //8
+        while(getcheck){
+          if (digitalRead(18)){
+            digitalWrite(6,LOW);
+            Serial.print("checkdone1");
+            getcheck = false;
+          }
+        }
       break;
     case '2':
       digitalWrite(6,HIGH);//
       while(getcheck){
-      if (digitalRead(19)){
-        digitalWrite(7,LOW);
-        getcheck = false;
-        Serial.print("checkdone2");
-      }
+        if (digitalRead(19)){
+          digitalWrite(7,LOW);
+          getcheck = false;
+          Serial.print("checkdone2");
+        }
       }
       break;
-      case '3':
+    case '3':
       digitalWrite(7,HIGH); //7
       while(getcheck){
-      if (digitalRead(20)){
-        digitalWrite(8,LOW);
-        getcheck = false;
-        Serial.print(slot);
-        Serial.print("checkdone3");
-      }
+        if (digitalRead(20)){
+          digitalWrite(8,LOW);
+          getcheck = false;
+          Serial.print(slot);
+          Serial.print("checkdone3");
+        }
       }
       break;
       
-      case '4':
+    case '4':
       digitalWrite(10,HIGH);
       while(getcheck){
-      if (digitalRead(21)){
-        digitalWrite(10,LOW);
-        getcheck = false;
-        Serial.print("checkdone4");
-      }
+        if (digitalRead(21)){
+          digitalWrite(10,LOW);
+          getcheck = false;
+          Serial.print("checkdone4");
+        }
       }
       break;
   }
-  if(opendoor == 'd'){
-    checkinterupt = false;
-    digitalWrite(15,LOW);
-    delay(3000);
-    digitalWrite(15,HIGH); 
-    Serial.print("opendone");
   }
-  else if (opendoor == 'o'){
-    checkinterupt = true;
+  else{
+    checkgetslot = false;
   }
-  else if (opendoor == 'A'){
-    checkinterupt = true;
-  }
+  
 }
 void loop(){
   readDistance();

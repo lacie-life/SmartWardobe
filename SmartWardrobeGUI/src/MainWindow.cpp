@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     // Need check APP_STATE before emit this signal
     connect(m_model, &AppModel::noPerson, this, [this] {
         CONSOLE << "Stop Person checking";
-        m_model->setState(AppModel::APP_STATE::NO_CHEKCING_STATE);
+        m_model->setState(AppModel::APP_STATE::NO_CHECKING_STATE);
         m_stackWidget->setCurrentWidget(m_wardrobeWidget);
         // m_cameraWidget->stopWidget();
     });
