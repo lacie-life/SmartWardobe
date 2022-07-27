@@ -227,13 +227,13 @@ void AppModel::extractData(QString &data)
     }
     else if(extract.at(0) == "p") {
         CONSOLE << extract.at(1);
-        if (extract.at(1) == "1"){
-            if (m_state == APP_STATE::NO_CHECKING_STATE && !doorState){
+        if (extract.at(1) == "1\r\n"){
+            if (m_state == APP_STATE::NO_CHECKING_STATE || !doorState){
                 CONSOLE << "Person checked";
                 emit havePerson();
             }
         }
-        else if (extract.at(1) == "0"){
+        else if (extract.at(1) == "0\r\n"){
             if (m_state == APP_STATE::CHECKING_STATE || m_state == APP_STATE::CHECKING_DONE_STATE)
             {
                 CONSOLE << "No person";
@@ -250,20 +250,20 @@ void AppModel::extractData(QString &data)
     else if (extract.at(0) == "check")
     {
         CONSOLE << extract.at(1);
-        if (extract.at(1) == "opened")
+        if (extract.at(1) == "opened\r\n")
         {
             CONSOLE << "Door opened";
             doorState = true;
         }
-        else if (extract.at(1) == "get")
+        else if (extract.at(1) == "get\r\n")
         {
             CONSOLE << "get done";
         }
-        else if (extract.at(1) == "set")
+        else if (extract.at(1) == "set\r\n")
         {
             CONSOLE << "set done";
         }
-        else if (extract.at(1) == "closed")
+        else if (extract.at(1) == "closed\r\n")
         {
             CONSOLE << "Door closed";
             doorState = false;

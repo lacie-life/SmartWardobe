@@ -29,6 +29,7 @@ int checkcount2 = 0;
 bool isperson = false;
 bool checkgetslot = false;
 bool checkinterupt = false;
+bool isdoorclose = true;
 void setup()
 { 
   Serial.begin(9600);
@@ -41,6 +42,8 @@ void setup()
   pinMode(19, INPUT);
   pinMode(20, INPUT);
   pinMode(21, INPUT);
+  pinMode(3, INPUT);
+  
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
@@ -51,7 +54,10 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(19), slot2, CHANGE);
   attachInterrupt(digitalPinToInterrupt(20), slot3, CHANGE);
   attachInterrupt(digitalPinToInterrupt(21), slot4, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), door, CHANGE);
+  
   pinMode(15,OUTPUT);
+  pinMode(27,INPUT);
   digitalWrite(15,HIGH);
 }
 void sendRFID(String data){
@@ -79,7 +85,7 @@ void readDistance(){
     else {
       isperson = true;
       checkcount1 = 0;
-      Serial.print("p:1");
+      Serial.println("p:1");
     }
   }
   else if (distance >=  35  && isperson){
@@ -89,7 +95,7 @@ void readDistance(){
     else {
       isperson = false;
       checkcount2 = 0;
-      Serial.print("p:0");
+      Serial.println("p:0");
     }
   }
   
@@ -134,6 +140,21 @@ void slot4(){
   readRFID();
   }
 }
+
+void door(){
+  int doorstate = digitalRead(3);
+    
+    if (doorstate == 0 && !isdoorclose){
+      Serial.println("check:closed");
+      delay(200);
+      isdoorclose = true;
+    }
+    else if(doorstate == 1 && isdoorclose){
+      Serial.println("check:opened");
+      isdoorclose = false;
+    }
+}
+
 void readRFID(){
   bool state = true;
   if (checkinterupt){
@@ -162,19 +183,15 @@ void readSerialString(){
     // read the incoming string:
     incomingString = Serial.readStringUntil('\n');
     checkgetslot = true;
-    Serial.print(incomingString);
-    Serial.print(incomingString.length());
 
     char opendoor = "";
     char slot = "";
     if (incomingString.length() == 4){
       opendoor = incomingString.charAt(0);  
-      Serial.print(opendoor);
     }
     else {
       opendoor = incomingString.charAt(0);
       slot = incomingString.charAt(5);  
-      Serial.print(incomingString.charAt(5));
     }
 
     if(opendoor == 'd'){
@@ -182,7 +199,7 @@ void readSerialString(){
       digitalWrite(15,LOW);
       delay(3000);
       digitalWrite(15,HIGH); 
-      Serial.print("opendone");
+      Serial.println("opendone");
     }
     else if (opendoor == 'o'){
       checkinterupt = true;
@@ -197,8 +214,8 @@ void readSerialString(){
         digitalWrite(8,HIGH); //8
         while(getcheck){
           if (digitalRead(18)){
-            digitalWrite(6,LOW);
-            Serial.print("checkdone1");
+            digitalWrite(8,LOW);
+            Serial.println("check:get");
             getcheck = false;
           }
         }
@@ -207,9 +224,9 @@ void readSerialString(){
       digitalWrite(6,HIGH);//
       while(getcheck){
         if (digitalRead(19)){
-          digitalWrite(7,LOW);
+          digitalWrite(6,LOW);
           getcheck = false;
-          Serial.print("checkdone2");
+          Serial.println("check:get");
         }
       }
       break;
@@ -217,10 +234,9 @@ void readSerialString(){
       digitalWrite(7,HIGH); //7
       while(getcheck){
         if (digitalRead(20)){
-          digitalWrite(8,LOW);
+          digitalWrite(7,LOW);
           getcheck = false;
-          Serial.print(slot);
-          Serial.print("checkdone3");
+          Serial.println("check:get");
         }
       }
       break;
@@ -231,7 +247,7 @@ void readSerialString(){
         if (digitalRead(21)){
           digitalWrite(10,LOW);
           getcheck = false;
-          Serial.print("checkdone4");
+          Serial.println("check:get");
         }
       }
       break;
@@ -242,7 +258,9 @@ void readSerialString(){
   }
   
 }
+
 void loop(){
+
   readDistance();
   readSerialString();
 }
