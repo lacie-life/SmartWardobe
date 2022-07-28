@@ -13,7 +13,7 @@
 
 ## Khóa điều khiển đóng mở tủ
 - [x] Khóa điện từ điều khiển bật tắt
-- [ ] Test tính năng với cửa tủ
+- [x] Test tính năng với cửa tủ
 
 ## Giao diện
 - [x] Module giao tiếp với Arduino
