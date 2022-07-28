@@ -40,8 +40,8 @@ void QCameraCapture::stream()
 
     // Prepare new image size to retrieve half-resolution images
     sl::Resolution image_size = m_camera.getCameraInformation().camera_configuration.resolution;
-    int new_width = image_size.width / 2;
-    int new_height = image_size.height / 2;
+    int new_width = image_size.width;
+    int new_height = image_size.height;
 
     sl::Resolution new_image_size(new_width, new_height);
 

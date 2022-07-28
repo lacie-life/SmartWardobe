@@ -217,7 +217,9 @@ void AppModel::extractData(QString &data)
 
     if(extract.at(0) == "set"){
         CONSOLE << extract.at(1);
-        bool result = addSlot(extract.at(1), extract.at(2));
+        QString subString = extract.at(2).mid(0,extract.at(2).length()-2);
+        CONSOLE << subString;
+        bool result = addSlot(extract.at(1), subString);
         if (result){
             CONSOLE << "Add slot success";
         }

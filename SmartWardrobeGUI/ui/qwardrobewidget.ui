@@ -12,7 +12,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1285</width>
     <height>720</height>
    </rect>
   </property>
@@ -71,25 +71,43 @@
       </item>
       <item>
        <widget class="QLabel" name="title">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>74</horstretch>
+          <verstretch>200</verstretch>
+         </sizepolicy>
+        </property>
         <property name="font">
          <font>
-          <pointsize>22</pointsize>
+          <pointsize>40</pointsize>
          </font>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(0,0,0,0%)</string>
+         <string notr="true"/>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
         </property>
         <property name="text">
-         <string>Smart Wardrobe</string>
+         <string>Tủ Thông Minh</string>
         </property>
         <property name="textFormat">
          <enum>Qt::AutoText</enum>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+        <property name="margin">
+         <number>28</number>
+        </property>
+        <property name="indent">
+         <number>18</number>
+        </property>
+        <property name="openExternalLinks">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -154,10 +172,10 @@
          </sizepolicy>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(136, 138, 133)</string>
+         <string notr="true"/>
         </property>
         <property name="lineWidth">
          <number>1</number>
@@ -192,10 +210,10 @@
          </sizepolicy>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(136, 138, 133)</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -224,10 +242,10 @@
          </sizepolicy>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(136, 138, 133)</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
@@ -259,7 +277,7 @@
          <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(245, 121, 0)</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>

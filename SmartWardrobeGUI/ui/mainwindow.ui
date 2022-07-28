@@ -23,7 +23,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image:url(:/images/data/res/kitten_wild_grass_323005_1280x720.jpg);background-repeat: no-repeat;</string>
+   <string notr="true">background-image: url(:/images/data/res/background1.jpg)</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">

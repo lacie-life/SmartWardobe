@@ -13,8 +13,8 @@ QCameraWidget::QCameraWidget(QWidget *parent, AppModel *model) :
 
     m_camera->moveToThread(new QThread(this));
 
-    connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
-    connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
+    //connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
+   // connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
 }
 
 QCameraWidget::~QCameraWidget()
@@ -41,7 +41,7 @@ void QCameraWidget::startWidget()
     connect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
     connect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);
     connect(m_camera, &QCameraCapture::frameUIReady, ui->imageViewer, &QLabel::setPixmap);
-    connect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
+    //connect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
 
     openCamera();
 }
@@ -54,7 +54,7 @@ void QCameraWidget::stopWidget()
     disconnect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
     disconnect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);
     disconnect(m_camera, &QCameraCapture::frameUIReady, ui->imageViewer, &QLabel::setPixmap);
-    disconnect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
+    //disconnect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
 
     closeCamera();
 }

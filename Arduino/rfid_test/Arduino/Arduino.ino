@@ -39,25 +39,21 @@ void loop()
   if (RC522.isCard())
   {
 //    /* If so then get its serial number */
-//    RC522.readCardSerial();
-//    for(int i=0;i<5;i++)
-//    {
-//      b = b + String(RC522.serNum[i]);
-//    }
-//    idx = idx + "A_1";
-//    id = id + b;
-//    String data = idx + ":" + id; 
-//    Serial.print(data);
-      
-     if (!check){
-      b = p_check + "1"; 
-      check = !check;
-     }else {
-      b = p_check + "0"; 
-      check = !check;
-     }
-     
-     Serial.print(b);
+    RC522.readCardSerial();
+    for(int i=0;i<5;i++)
+    {
+      b = b + String(RC522.serNum[i]);
+    }
+
+    Serial.println(b);
+//      
+//     if (!check){
+//      b = p_check + "1"; 
+//      check = !check;
+//     }else {
+//      b = p_check + "0"; 
+//      check = !check;
+//     }
 
   }
   delay(1000);

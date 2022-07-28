@@ -61,7 +61,7 @@ void setup()
   digitalWrite(15,HIGH);
 }
 void sendRFID(String data){
-  Serial.print(data);
+  Serial.println(data);
   
 }
 void readDistance(){
@@ -159,8 +159,6 @@ void readRFID(){
   bool state = true;
   if (checkinterupt){
     if (!checkgetslot){
-    
-    
       while (state){
     
          if (RC522.isCard()){
