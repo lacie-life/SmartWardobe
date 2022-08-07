@@ -19,7 +19,15 @@ void QFaceInforWidget::loadFaceInfor()
 {
     ui->nameEdit->setText(m_model->m_currentFace.name());
     ui->cvEdit->setText(m_model->m_currentFace.type());
-    ui->positionEdit->setText(m_model->m_currentFace.currentPosition());
+    QString position = m_model->m_currentFace.currentPosition();
+    if(position == "")
+    {
+        ui->positionEdit->setText("Không có đồ trong tủ");
+    }
+    else {
+        ui->positionEdit->setText(m_model->m_currentFace.currentPosition());
+    }
+
 
 }
 
