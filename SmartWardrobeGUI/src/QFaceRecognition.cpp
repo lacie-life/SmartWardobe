@@ -58,7 +58,6 @@ cv::Mat QFaceRecognition::dectectFace(cv::Mat frame)
         roi_b.width = (faces[ib].width);
         roi_b.height = (faces[ib].height);
 
-
         crop = frame(roi_b);
         resize(crop, res, cv::Size(128, 128), 0, 0,cv::INTER_LINEAR);
         cvtColor(crop, gray, cv::COLOR_BGR2GRAY);
