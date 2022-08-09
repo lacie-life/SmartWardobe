@@ -80,9 +80,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_C)
     {
         m_stackWidget->setCurrentWidget(m_cameraWidget);
+        if (!m_cameraWidget->getCameraState()){
+            m_cameraWidget->startWidget();
+        }
     }
     else if (event->key() == Qt::Key_F)
     {
+        m_faceInforWidget->loadFaceInfor();
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
     }
     else if (event->key() == Qt::Key_1)
