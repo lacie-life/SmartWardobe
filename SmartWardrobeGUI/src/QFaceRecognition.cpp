@@ -196,7 +196,7 @@ void QFaceRecognition::recognition(cv::Mat& frame)
 
             p_name = QString::fromStdString(std::to_string(label));
             names.append(p_name);
-
+            
             //drawing green rectagle in recognize face
             rectangle(frame, face_i, CV_RGB(0, 255, 0), 1);
             QString text = p_name;

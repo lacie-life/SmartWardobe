@@ -8,12 +8,13 @@
 #include <QImage>
 #include <QPixmap>
 #include <QStringList>
-#include <QDateTime>g
+#include <QDateTime>
 
 AppModel::AppModel(QObject *parent)
     : QObject{parent},
       m_database(WardrobeDB::getInstance()),
-      m_state(NO_CHEKCING_STATE)
+      m_state(NO_CHECKING_STATE),
+      doorState(false)
 {
     // Serial config
     // Image processing algorithm setting
@@ -55,7 +56,7 @@ bool AppModel::addSlot(QString position, QString rfid)
     return true;
 }
 
-bool AppModel::removeSlot(QString& position)
+bool AppModel::removeSlot(QString position)
 {
     // TODO: check and remove rfid
     QSqlQuery query(m_database->getDBInstance());
@@ -174,18 +175,28 @@ void AppModel::checkFace(QStringList &names)
         QString slot = findSlot(m_currentFace.rfid());
 
         m_currentFace.setCurrentPosition(slot);
+        QByteArray opendoor = "d:1";
 
         CONSOLE << "Face slot: " << slot;
         CONSOLE << "Face name: " << m_currentFace.name();
         CONSOLE << "Face type: " << m_currentFace.type();
         CONSOLE << "Face slot: " << m_currentFace.currentPosition();
+        if(m_currentFace.type() != QString("staff")){
+            CONSOLE << m_currentFace.type();
+            QByteArray getslot = m_currentFace.currentPosition().toUtf8();
 
+            m_handler->writeData(opendoor + getslot);
+        }
+        else {
+            m_handler->writeData(opendoor);
+        }
         emit recognitionDone();
     }
 }
 
 void AppModel::setState(APP_STATE state)
 {
+    CONSOLE << "STATE: " << state;
     m_state = state;
 }
 
@@ -206,7 +217,9 @@ void AppModel::extractData(QString &data)
 
     if(extract.at(0) == "set"){
         CONSOLE << extract.at(1);
-        bool result = addSlot(extract.at(1), extract.at(2));
+        QString subString = extract.at(2).mid(0,extract.at(2).length()-2);
+        CONSOLE << subString;
+        bool result = addSlot(extract.at(1), subString);
         if (result){
             CONSOLE << "Add slot success";
         }
@@ -216,13 +229,49 @@ void AppModel::extractData(QString &data)
     }
     else if(extract.at(0) == "p") {
         CONSOLE << extract.at(1);
-        if (extract.at(1) == "1"){
-            CONSOLE << "Person checked";
-            emit havePerson();
+        if ((extract.at(1) == "1\r\n") && !doorState){
+            if (m_state == APP_STATE::NO_CHECKING_STATE){
+                CONSOLE << doorState;
+                CONSOLE << "Person checked";
+                emit havePerson();
+            }
         }
-        else{
-            CONSOLE << "No person";
-            emit noPerson();
+        else if ((extract.at(1) == "0\r\n") && doorState){
+            if ((m_state == APP_STATE::CHECKING_STATE))
+            {
+                CONSOLE << "No person";
+                emit noPerson();
+            }
+        }
+    }
+    else if (extract.at(0)== "opendone\r\n"){
+        QString opencheck = "o\n";
+        QByteArray openchecksend = opencheck.toUtf8();
+        m_handler->writeData(openchecksend);
+
+    }
+    else if (extract.at(0) == "check")
+    {
+        CONSOLE << extract.at(1);
+        if (extract.at(1) == "opened\r\n")
+        {
+            CONSOLE << "Door opened";
+            doorState = true;
+        }
+        else if (extract.at(1) == "get\r\n")
+        {
+            CONSOLE << "get done";
+            removeSlot(m_currentFace.currentPosition());
+        }
+        else if (extract.at(1) == "set\r\n")
+        {
+            CONSOLE << "set done";
+        }
+        else if (extract.at(1) == "closed\r\n")
+        {
+            CONSOLE << "Door closed";
+            doorState = false;
+            emit doorClose();
         }
     }
 }

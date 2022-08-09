@@ -9,10 +9,12 @@ QCameraWidget::QCameraWidget(QWidget *parent, AppModel *model) :
     m_model = model;
     m_camera = new QCameraCapture();
 
+    m_camera_state = false;
+
     m_camera->moveToThread(new QThread(this));
 
-    connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
-    connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
+    //connect(ui->closeButton, &QPushButton::clicked, this, &QCameraWidget::closeCamera);
+   // connect(ui->startButton, &QPushButton::clicked, this, &QCameraWidget::startWidget);
 }
 
 QCameraWidget::~QCameraWidget()
@@ -24,8 +26,13 @@ QCameraWidget::~QCameraWidget()
     delete ui;
 }
 
+bool QCameraWidget::getCameraState(){
+    return m_camera_state;
+}
+
 void QCameraWidget::startWidget()
 {
+    m_camera_state = true;
     m_camera->initCamera();
 
     m_model->setState(AppModel::CHECKING_STATE);
@@ -34,20 +41,20 @@ void QCameraWidget::startWidget()
     connect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
     connect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);
     connect(m_camera, &QCameraCapture::frameUIReady, ui->imageViewer, &QLabel::setPixmap);
-    connect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
+    //connect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
 
     openCamera();
 }
 
 void QCameraWidget::stopWidget()
 {
-    m_model->setState(AppModel::NO_CHEKCING_STATE);
+    m_model->setState(AppModel::NO_CHECKING_STATE);
 
     disconnect(m_camera->thread(), &QThread::started, m_camera, &QCameraCapture::stream);
     disconnect(m_camera->thread(), &QThread::finished, m_camera, &QCameraCapture::deleteLater);
     disconnect(m_camera, &QCameraCapture::frameReady, m_model, &AppModel::processImage);
     disconnect(m_camera, &QCameraCapture::frameUIReady, ui->imageViewer, &QLabel::setPixmap);
-    disconnect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
+    //disconnect(m_model, &AppModel::idRecognizedNotify, ui->idFace, &QLabel::setText);
 
     closeCamera();
 }

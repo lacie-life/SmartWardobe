@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Core Widgets Sql SerialPort Svg REQUIRED)
 
 find_package(ZED 3 REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4.2 REQUIRED)
 find_package(CUDA REQUIRED)
 
 include_directories(${CUDA_INCLUDE_DIRS})
@@ -39,6 +39,10 @@ set(UI ${CMAKE_CURRENT_LIST_DIR}/ui/mainwindow.ui
 
 qt5_wrap_ui(UI_HEADERS ${UI})
 
+list(APPEND RESOURCES resources.qrc)
+
+qt5_add_resources(RCC_SOURCES ${RESOURCES})
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
@@ -46,6 +50,7 @@ add_executable(SmartWardrobeGUI
     ${HEADERS}
     ${SOURCES}
     ${UI_HEADERS}
+    ${RCC_SOURCES}
     )
 
 if (LINK_SHARED_ZED)

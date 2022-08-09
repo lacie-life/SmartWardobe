@@ -56,7 +56,7 @@ void QWardrobeWidget::updateUI()
 
 //                QPixmap pm = QPixmap::fromImage(image);
                 QPixmap pm(UNAVAILABLE_SLOT);
-                ptr->setPixmap(pm);
+                ptr->setPixmap(pm.scaled(230,190,Qt::KeepAspectRatio,Qt::FastTransformation));
                 ptr->setScaledContents(true);
                 qDebug()<<query.value(0).toString() << " : is Unavaiable";
             }
@@ -73,7 +73,7 @@ void QWardrobeWidget::updateUI()
 //                QPixmap pm = QPixmap::fromImage(image);
 
                 QPixmap pm(AVAILABLE_SLOT);
-                ptr->setPixmap(pm);
+                ptr->setPixmap(pm.scaled(200,200,Qt::KeepAspectRatio,Qt::FastTransformation));
                 ptr->setScaledContents(true);
                 qDebug()<<query.value(0).toString() << " : is Available";
             }

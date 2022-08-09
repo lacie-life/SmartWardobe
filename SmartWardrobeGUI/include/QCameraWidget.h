@@ -20,6 +20,7 @@ public:
 
     void startWidget();
     void stopWidget();
+    bool getCameraState();
 
 public slots:
     void openCamera();
@@ -29,6 +30,7 @@ private:
     Ui::QCameraWidget *ui;
     AppModel* m_model;
     QCameraCapture* m_camera;
+    bool m_camera_state;
 };
 
 #endif // QCAMERAWIDGET_H

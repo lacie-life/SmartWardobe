@@ -72,7 +72,8 @@ void QDataHandler::closeSerialPort()
 
 void QDataHandler::writeData(const QByteArray &data)
 {
-    m_serial->write(data);
+    CONSOLE<< data;
+    m_serial->write(data+ "\n");
 }
 
 void QDataHandler::readData()
