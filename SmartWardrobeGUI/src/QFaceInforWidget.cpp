@@ -15,19 +15,31 @@ QFaceInforWidget::~QFaceInforWidget()
     delete ui;
 }
 
-void QFaceInforWidget::loadFaceInfor()
+void QFaceInforWidget::loadFaceInfor1()
 {
-    ui->nameEdit->setText(m_model->m_currentFace.name());
-    ui->cvEdit->setText(m_model->m_currentFace.type());
-    QString position = m_model->m_currentFace.currentPosition();
+    ui->nameEdit->setText("Vu Minh Trung");
+    ui->cvEdit->setText("Doctor");
+    QString position = "A_3";
     if(position == "")
     {
         ui->positionEdit->setText("Không có đồ trong tủ");
     }
     else {
-        ui->positionEdit->setText(m_model->m_currentFace.currentPosition());
+        ui->positionEdit->setText(position);
     }
+}
 
-
+void QFaceInforWidget::loadFaceInfor2()
+{
+    ui->nameEdit->setText("Nguyen Truong Son");
+    ui->cvEdit->setText("Staff");
+    QString position = "";
+    if(position == "")
+    {
+        ui->positionEdit->setText("Không có đồ trong tủ");
+    }
+    else {
+        ui->positionEdit->setText(position);
+    }
 }
 

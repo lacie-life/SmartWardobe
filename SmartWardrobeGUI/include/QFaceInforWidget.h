@@ -15,7 +15,8 @@ class QFaceInforWidget : public QWidget
 public:
     explicit QFaceInforWidget(QWidget *parent = nullptr, AppModel* model = nullptr);
     ~QFaceInforWidget();
-    void loadFaceInfor();
+    void loadFaceInfor1();
+    void loadFaceInfor2();
 
 private:
     Ui::QFaceInforWidget *ui;
