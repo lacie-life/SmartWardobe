@@ -43,3 +43,32 @@ void QFaceInforWidget::loadFaceInfor2()
     }
 }
 
+void QFaceInforWidget::loadFaceInfor3()
+{
+    ui->nameEdit->setText("Khong xac dinh");
+    ui->cvEdit->setText("");
+    QString position = "";
+    if(position == "")
+    {
+        ui->positionEdit->setText("Không có đồ trong tủ");
+    }
+    else {
+        ui->positionEdit->setText(position);
+    }
+
+}
+
+void QFaceInforWidget::loadFaceInfor4()
+{
+    ui->nameEdit->setText("Pham Quang Duc");
+    ui->cvEdit->setText("Doctor");
+    QString position = "";
+    if(position == "")
+    {
+        ui->positionEdit->setText("Không có đồ trong tủ");
+    }
+    else {
+        ui->positionEdit->setText(position);
+    }
+}
+

@@ -94,6 +94,16 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         m_faceInforWidget->loadFaceInfor2();
         m_stackWidget->setCurrentWidget(m_faceInforWidget);
     }
+    else if (event->key() == Qt::Key_T)
+    {
+        m_faceInforWidget->loadFaceInfor3();
+        m_stackWidget->setCurrentWidget(m_faceInforWidget);
+    }
+    else if (event->key() == Qt::Key_Y)
+    {
+        m_faceInforWidget->loadFaceInfor4();
+        m_stackWidget->setCurrentWidget(m_faceInforWidget);
+    }
     else if (event->key() == Qt::Key_1)
     {
         // LED 1 ON

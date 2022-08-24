@@ -17,6 +17,8 @@ public:
     ~QFaceInforWidget();
     void loadFaceInfor1();
     void loadFaceInfor2();
+    void loadFaceInfor3();
+    void loadFaceInfor4();
 
 private:
     Ui::QFaceInforWidget *ui;
