@@ -2,8 +2,11 @@
 #include <RFID.h>
 #include <string.h>
  
+// Cảm biến khoảng cách (Sonar)
 const int trigPin = 23;
 const int echoPin = 25;
+
+// Đầu đọc RFID
 /* Ket noi chan (Arduino Mega)
  *  Reset     5
  *  SPI SDA   53
@@ -38,24 +41,32 @@ void setup()
   /* Initialise the RFID reader */
   RC522.init();
 //  Serial.print("Oke");
+ 
+  // 4 Cảm biến chạm
   pinMode(18, INPUT);
   pinMode(19, INPUT);
   pinMode(20, INPUT);
   pinMode(21, INPUT);
   pinMode(3, INPUT);
   
+ // 4 đèn LED báo hiệu
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   pinMode(10, OUTPUT);
+ 
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
   pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+ 
   attachInterrupt(digitalPinToInterrupt(18), slot1, CHANGE);
   attachInterrupt(digitalPinToInterrupt(19), slot2, CHANGE);
   attachInterrupt(digitalPinToInterrupt(20), slot3, CHANGE);
   attachInterrupt(digitalPinToInterrupt(21), slot4, CHANGE);
+ 
+  // Chân điều khiển khóa tủ
   attachInterrupt(digitalPinToInterrupt(3), door, CHANGE);
   
+ 
   pinMode(15,OUTPUT);
   pinMode(27,INPUT);
   digitalWrite(15,HIGH);
